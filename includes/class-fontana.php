@@ -159,8 +159,11 @@ class Fontana {
 		$this->loader->add_action('init', $plugin_admin, 'registerCallToActionType');
         $this->loader->add_action('init', $plugin_admin, 'registerResourceType');
         $this->loader->add_action('init', $plugin_admin, 'registerLocationTaxonomy');
+        $this->loader->add_action('init', $plugin_admin, 'registerResourceTypeTaxonomy');
         $this->loader->add_action('init', $plugin_admin, 'registerServicesTaxonomy');
         $this->loader->add_action('init', $plugin_admin, 'registerSubjectsTaxonomy');
+        $this->loader->add_action('init', $plugin_admin, 'registerVendorsTaxonomy');
+
     }
 
 	/**
