@@ -156,7 +156,11 @@ class Fontana {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+        $this->loader->add_action('init', $plugin_admin, 'registerAudienceTaxonomy');
+        $this->loader->add_action('init', $plugin_admin, 'registerGenreTaxonomy');
 		$this->loader->add_action('init', $plugin_admin, 'registerCallToActionType');
+        $this->loader->add_action('init', $plugin_admin, 'registerCollectionItemType');
+        $this->loader->add_action('init', $plugin_admin, 'registerFeaturedCollectionTaxonomy');
         $this->loader->add_action('init', $plugin_admin, 'registerResourceType');
         $this->loader->add_action('init', $plugin_admin, 'registerLocationTaxonomy');
         $this->loader->add_action('init', $plugin_admin, 'registerResourceTypeTaxonomy');
