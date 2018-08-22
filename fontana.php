@@ -8,15 +8,10 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://schoeyfield.com
- * @since             1.1.0
- * @package           Fontana
- *
- * @wordpress-plugin
  * Plugin Name:       Fontana Regional Library
  * Plugin URI:        https://fontanalib.org
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.1.0
+ * Version:           1.2
  * Author:            Michael Schofield
  * Author URI:        https://schoeyfield.com
  * GitHub Plugin URI: https://github.com/fontana-regional-library/big-kahuna

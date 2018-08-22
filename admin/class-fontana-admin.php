@@ -228,7 +228,7 @@ class Fontana_Admin {
             'show_in_nav_menus'          => true,
             'show_tagcloud'              => false,
             'show_in_rest'               => true,
-            'rest_base'                  => 'genres',
+            'rest_base'                  => 'featured-collections',
         );
         register_taxonomy( 'featured-collections', array( 'collection-item' ), $args );
     }
