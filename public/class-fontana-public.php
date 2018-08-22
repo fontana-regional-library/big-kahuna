@@ -100,4 +100,39 @@ class Fontana_Public {
 
 	}
 
+	public function registerMenusWithApi()
+    {
+        register_rest_route('menus/v1', '/menus', array(
+            'methods' => 'GET',
+            'callback' => [$this, 'getAllMenus']
+        ));
+
+        register_rest_route( 'menus/v1', '/menus/(?P<id>[a-zA-Z0-9_-]+)', array(
+            'methods' => 'GET',
+            'callback' => [$this, 'getMenuByLocation'],
+        ) );
+    }
+
+    public function getAllMenus()
+    {
+        $menus = [];
+        foreach (get_registered_nav_menus() as $slug => $description) {
+            $object = new \stdClass();
+            $object->slug = $slug;
+            $object->description = $description;
+            $menus[] = $object;
+        }
+
+        return $menus;
+    }
+
+    function getMenuByLocation ( $data ) {
+        $menu = new stdClass;
+        $menu->items = [];
+        if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $data['id'] ] ) ) {
+            $menu = get_term( $locations[ $data['id'] ] );
+            $menu->items = wp_get_nav_menu_items($menu->term_id);
+        }
+        return $menu;
+    }
 }
