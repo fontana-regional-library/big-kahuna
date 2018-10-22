@@ -134,5 +134,51 @@ class Fontana_Public {
             $menu->items = wp_get_nav_menu_items($menu->term_id);
         }
         return $menu;
-    }
+	}
+	public function register_images_field() {
+		register_rest_field( array('collection-item','post'), 'featured_image',
+        array(
+          'get_callback'    => array( $this, 'get_image_url_full'),
+          'update_callback' => null,
+          'schema'          => null,
+        )
+      );
+
+      
+       // Add 'featured_image_thumbnail'
+      
+      register_rest_field( array('collection-item','post'), 'featured_image_thumbnail',
+         array(
+           'get_callback'    => array( $this, 'get_image_url_thumb'),
+           'update_callback' => null,
+           'schema'          => null,
+         )
+       );
+	}
+	
+	function get_image_url_thumb(){
+		$url = $this->get_image('thumbnail');
+		return $url;
+	  }
+	
+	  
+	   // Get Image: Full
+	  function get_image_url_full(){
+		$url = $this->get_image('full');
+		return $url;
+	  }
+	
+	  
+	   // Get Image Helpers
+	  function get_image($size) {
+		$id = get_the_ID();
+	
+		if ( has_post_thumbnail( $id ) ){
+			$img_arr = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), $size );
+			$url = $img_arr[0];
+			return $url;
+		} else {
+			return false;
+		}
+	}
 }
