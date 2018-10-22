@@ -554,7 +554,7 @@ class Fontana_Admin {
             'label'                 => __( 'Collection Item', 'fontana' ),
             'description'           => __( 'Collection Items are select books and media from the catalog', 'fontana' ),
             'labels'                => $labels,
-            'supports'              => array( 'title' ),
+            'supports'              => array( 'title', 'thumbnail' ),
             'taxonomies'            => array(),
             'hierarchical'          => false,
             'public'                => true,
