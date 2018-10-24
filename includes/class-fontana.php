@@ -169,7 +169,13 @@ class Fontana {
 				$this->loader->add_action('init', $plugin_admin, 'registerTopicsTaxonomy');
 				$this->loader->add_action( 'admin_menu', $plugin_admin, 'fontana_add_plugin_page' );
 				$this->loader->add_action( 'admin_init', $plugin_admin, 'fontana_page_init' );
-
+				$this->loader->add_action('admin_post_collection_check', $plugin_admin,'fontana_processImportedPosts');
+				$this->loader->add_action('admin_post_collection_publish', $plugin_admin,'fontana_publishProcessedCollections');
+				//$this->loader->add_action('pmxi_after_xml_import', $plugin_admin,'fontana_processImportedPosts'); fontana_publishProcessedCollections
+				$this->loader->add_filter('import_cover_image', $plugin_admin,'fontana_importCoverImage');
+				$this->loader->add_filter('check_xml_api', $plugin_admin,'fontana_getApiXmlResults');
+				$this->loader->add_filter('check_json_api', $plugin_admin,'fontana_getApiJsonResults');
+				$this->loader->add_filter('save_cover_image', $plugin_admin,'fontana_saveThumbnailImage', 10, 3);
     }
 
 	/**

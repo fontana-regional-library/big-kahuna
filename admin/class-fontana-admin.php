@@ -696,4 +696,331 @@ class Fontana_Admin {
             isset( $this->options['omdb_APIKEY'] ) ? esc_attr( $this->options['omdb_APIKEY']) : ''
         );
     }
+        /** 
+     * Upload image, set as thumbnail
+     */
+    function fontana_saveThumbnailImage($fileUrl, $imageTitle, $post_id) {
+        $image_name       = urlencode($imageTitle) . ".jpg";
+        $upload_dir       = wp_upload_dir(); // Set upload folder
+        $image_data       = file_get_contents($fileUrl); // Get image data
+        $unique_file_name = wp_unique_filename( $upload_dir['path'], $image_name ); // Generate unique name
+        $filename         = basename( $unique_file_name ); // Create image file name
+
+        // Check folder permission and define file location
+        if( wp_mkdir_p( $upload_dir['path'] ) ) {
+                $file = $upload_dir['path'] . '/' . $filename;
+        } else {
+                $file = $upload_dir['basedir'] . '/' . $filename;
+        }
+
+        // Create the image  file on the server
+        file_put_contents( $file, $image_data );
+
+        // Check image file type
+        $wp_filetype = wp_check_filetype( $filename, null );
+
+        // Set attachment data
+        $attachment = array(
+                'post_mime_type' => $wp_filetype['type'],
+                'post_title'     => sanitize_file_name( $filename ),
+                'post_content'   => '',
+                'post_status'    => 'inherit'
+        );
+        error_log( "Saving thumbnail.... " . $filename );
+        // Create the attachment
+        $attach_id = wp_insert_attachment( $attachment, $file, $post_id );
+
+        // Include image.php
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+
+        // Define attachment metadata
+        $attach_data = wp_generate_attachment_metadata( $attach_id, $file );
+
+        // Assign metadata to attachment
+        wp_update_attachment_metadata( $attach_id, $attach_data );
+
+        // And finally assign featured image to post
+        set_post_thumbnail( $post_id, $attach_id );
+        error_log( "Thumbnail Set!");
+        return;
+    }
+    /**
+    *  Get results & encode
+    **/
+    function fontana_getApiXmlResults ($url) {
+        $gr_response = wp_remote_get ( $url );
+        return simplexml_load_string(wp_remote_retrieve_body( $gr_response ));
+    }
+    function fontana_getApiJsonResults ($url) {
+        $gr_response = wp_remote_get ( $url );
+        return json_decode(wp_remote_retrieve_body( $gr_response ), true); //returns array
+    }
+    /**
+     * Get imported posts when triggered on fontana settingspage, check for featured images/thumbanils and attempt to retrieve from other sources
+     * public function fontana_processImportedPosts($import_id)
+     */
+    public function fontana_publishProcessedCollections() {
+        $collectionItems = get_posts( array(
+            'post_type' => 'collection-item',
+            'post_status' => 'draft',
+            'numberposts' => -1,
+            'date_query' => array (
+                'default_column' => 'post_date',
+                array(
+                    'after' => '-72 hours'
+                ),
+            )
+        ) );
+        foreach($collectionItems as $post){
+            $post_id = $post->ID;
+            $thumbnail = get_post_meta($post_id, '_thumbnail_id', true);
+            $audiences= wp_get_post_terms( $post_id, 'audience', array("fields"=>"names"));
+            $genres = wp_get_post_terms( $post_id, 'genres', array("fields"=>"names"));  
+            if($thumbnail && count($audiences) == 1 && count($genres) !== 0){
+                wp_publish_post( $post_id );
+                }
+        }
+    }
+    public function fontana_processImportedPosts() {
+        $periodicalPosts = get_posts( array(
+            'post_type' => 'collection-item',
+            'post_status' => array(
+                'publish','draft'
+            ),
+            'numberposts' => -1,
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'topics',
+                    'field'    => 'name',
+                    'terms'    => array( 'Periodical', 'Periodicals', 'Newspaper', 'Newspapers', 'Catalog', 'Catalogs' )
+                )
+            )
+        ) );
+        error_log("number of periodicals: " . count($periodicalPosts)); 
+        foreach ($periodicalPosts as $periodical) {
+            error_log("Trashing posts.... ". $periodical->ID . " trashed.");
+            wp_trash_post($periodical->ID);
+        }
+        $importedPosts = get_posts( array(
+            'post_type' => 'collection-item',
+            'post_status' => array(
+                'publish','draft'
+            ),
+            'numberposts' => -1,
+            'date_query' => array (
+                'default_column' => 'post_date',
+                array(
+                    'after' => '-72 hours'
+                ),
+            )
+        ) );
+        $noThumbnails = array();
+        foreach($importedPosts as $post){
+            $post_id = $post->ID;
+            $thumbnail = get_post_meta($post_id, '_thumbnail_id', true);  
+        if(!$thumbnail){
+                $noThumbnails[]= $post_id;
+                }
+        $audiences=wp_get_post_terms( $post_id, 'audience', array("fields"=>"names"));
+        if(count($audiences) !== 1) {
+            $topics = wp_get_post_terms( $post_id, 'topics', array("fields"=>"names"));
+            $genres = wp_get_post_terms( $post_id, 'genres', array("fields"=>"names"));
+            if (in_array("Juvenile", $topics) || in_array("Juvenile fiction", $topics) || in_array("Juvenile drama", $topics) || in_array("Juvenile literature", $topics)|| in_array("Juvenile films", $topics) || in_array("Easy", $genres)) {
+                wp_set_object_terms($post_id, 'Juvenile', 'audience');
+                error_log("setting Audience Juvenile: " . $post_id);
+            } elseif (in_array('Young Adult', $audiences)) {
+                wp_set_object_terms($post_id, 'Young Adult', 'audience');
+                error_log("setting Audience Young Adult: " . $post_id);
+            } elseif (count($audiences) == 0) {
+                wp_set_object_terms($post_id, 'Adult', 'audience');
+            wp_update_post(array(
+            'ID'    =>  $post_id,
+            'post_status'   =>  'draft'
+            ));
+            error_log("setting Audience Adult: " . $post_id);
+            } else {
+                wp_update_post(array(
+                    'ID'    =>  $post_id,
+                    'post_status'   =>  'draft'
+                    ));
+                    error_log("setting to draft - multiple audiences: " . $post_id);
+            }
+        }
+        }
+        error_log("number of results with no thumbnails: " . count($noThumbnails));
+        foreach($noThumbnails as $item){ 
+            apply_filters('import_cover_image',$item);
+        }
+    }
+
+    function fontana_checkAudienceTerms($post_id) {
+    }
+
+    function fontana_importCoverImage($post_id) {
+        $coverImgUrl="";
+        $gr_img_url="";
+        $fontana_options = get_option($this->plugin_name);
+        $itemTitle = html_entity_decode(get_the_title($post_id));
+        // Check if collection item is a book and doesn't have a thumbnail
+        if (!has_term("Video", "genres", $post_id)) {
+            $itemType = get_field("item_type", $post_id);
+            if (has_term("Music", "genres", $post_id) && stripos($itemType, "sound") !== false ){
+                error_log( "Skipping Cd? " . $post_id);
+                return;
+            } else {
+        error_log( "no thumbnail found.");
+                $checkIsbns = get_post_meta($post_id, 'identifiers', true);
+                $gr_api = $fontana_options['goodreads_APIKEY'];
+                $isbnFieldId = 0;
+                $bookTitle = preg_replace('/\[[^)]+\]/', "", $itemTitle);
+                $gr_img_url = "";
+        error_log( "Number of ISBNs: " . $checkIsbns );
+                // Check if collection item has some ISBNs - lets look up book covers by ISBN first
+                if ($checkIsbns > 0){
+                    while (!$coverImgUrl && ($isbnFieldId < $checkIsbns) ){
+                        switch ($isbnFieldId) {
+                            case 0: $isbnField = "identifiers_0_identifier"; break 1;
+                            default: $isbnField = "identifiers_".strval($isbnFieldId)."_identifier"; break 1;
+                        }
+        error_log( "We're on field number: " . $isbnField );
+                        $isbnFieldValue = get_field($isbnField, $post_id);
+                        $isbnFieldValues = explode(' | ', $isbnFieldValue);
+                        $isbn = $isbnFieldValues[0];
+                        $idType = strtolower($isbnFieldValues[1]);
+                        // Checks that identifier is an ISBN
+                        if (preg_match('/(\d+X?)/', $isbn)){
+                        switch ($idType) {
+                            case "isbn": 
+        error_log( "Checking ISBN value: " . $isbn );
+                                $gr_Url = "https://www.goodreads.com/book/isbn/".$isbn."?key=".$gr_api;
+                                // Retrieve results from API - XML
+                                $gr_xml = apply_filters('check_xml_api', $gr_Url);
+                                
+                                if(is_object($gr_xml)){
+                                $gr_img_url= $gr_xml->book->image_url;
+                                }
+                            default: break;
+                        }
+                        // GoodReads supplies cover even if actual cover not available
+                        // Filter out 'no photo available' images from import
+                        if ($gr_img_url && stripos($gr_img_url, "nophoto") === false) {
+                            error_log( "Trying to save thumbnail.... " . $gr_img_url );
+                                                $coverImgUrl = $gr_img_url;
+                                                // Upload and Save Thumbnail image
+                                                apply_filters('save_cover_image', $coverImgUrl, $bookTitle, $post_id);
+                                                wp_publish_post( $post_id );
+                            error_log( "Post published");
+                                                return;
+                                            }
+                    }
+                        $isbnFieldId ++;
+                    }
+        error_log( "No image found - ISBN");
+                }
+                // If the collection item doesn't have any ISBNs or if the ISBN search didn't return a valid cover image
+                // Search the GoodReads API by Title and Author last name and retrieve first result
+                if(!$coverImgUrl) {
+        error_log( "Searching Goodreads by Title...");
+                    // Do some formatting to check for company names...
+                    $bookAuthor = get_field("creators_0_name", $post_id);
+                    if (strpos($bookAuthor, ",") !== FALSE && substr(strtolower($bookAuthor), -5) !== ", inc") {
+                            $authorNameArray = explode(", ", $bookAuthor);
+                            $authorSearch = $authorNameArray[0];
+                            $notLast = explode(" ", $authorNameArray[1]);
+                            $authorSearch = $authorSearch . "+" . $notLast[0];
+                    } else {
+                            $bookAuthor  = preg_replace("/\([^)]+\)/", "", $bookAuthor);
+                            $authorNameArray = explode(",", $bookAuthor);
+                            $authorSearch = $authorNameArray[0];
+                    }
+                    $gr_Url = "https://www.goodreads.com/search/index.xml?key=".$gr_api."&q=" . urlencode($bookTitle) . "+" . urlencode($authorSearch);
+        error_log( "Checking  search value: " . $gr_Url );
+                    // Retrieve results from API - XML
+                    $gr_xml = apply_filters('check_xml_api', $gr_Url);
+                    $resultCount = $gr_xml->search->query->{"total-results"};
+                    if (is_object($gr_xml) && intval($resultCount)>0){
+                    $gr_img_url = $gr_xml->search->results->work[0]->best_book[0]->image_url[0];
+        error_log( $gr_img_url );
+                    }
+                    // GoodReads supplies cover even if actual cover not available
+                    // Filter out 'no photo available' images from import
+                    if ($gr_img_url && stripos($gr_img_url, "nophoto") === false) {
+                        $coverImgUrl = $gr_img_url;
+        error_log( "Trying to save thumbnail.... " . $gr_img_url);
+                        // Upload and Save Thumbnail image
+                        apply_filters('save_cover_image', $coverImgUrl, $bookTitle, $post_id);
+                        wp_publish_post( $post_id );
+        error_log( "Post published");
+                        return;
+                    }
+        error_log( "No image found - Good Reads Query");
+                } 
+            }
+        }
+        // If the collection item is a video
+        if(has_term("Video", "genres", $post_id)){
+            // Filter out videos of television series DVDs, to get movie posters
+            //$topics = wp_get_post_terms( $post_id, 'topics', array("fields"=>"names"));
+            $check = false;
+            $movieTitle = preg_replace('/\[[^)]+\]/', "", $itemTitle);
+            error_log ("Checking: " . $movieTitle);
+            $omdb_api = $fontana_options['omdb_APIKEY'];
+            $partNumber = get_post_meta($post_id, 'partNumber', true);
+            $altTitle = get_post_meta($post_id, 'alternative_title', true);
+            $topics = wp_get_post_terms( $post_id, 'topics', array("fields"=>"names"));
+            $omdb_img_url = "";  
+            foreach($topics as $topic) {
+                switch ($check) {
+                    case false: $check = strpos(strtolower($topic), 'television');
+                    case true: error_log( "Breaking check on television..."); break 2;
+                }
+                switch ($check) {
+                    case false: $check = strpos(strtolower($topic), 'series');
+                    case true: error_log( "Breaking check on Series..."); break 2;
+                }
+    error_log ("television check is: " . var_export($check));
+            }
+
+            if ($check === false && stripos($partNumber, 'season') === false && stripos($altTitle, 'season ') === false) {
+                $omdb_url = "http://www.omdbapi.com/?t=".urlencode($movieTitle)."&type=movie&apikey=".$omdb_api; //$omdb_url = "http://www.omdbapi.com/?t=".urlencode($movieTitle)."&r=xml&apikey=".$omdb_api;
+                // Retrieve results from API - JSON
+error_log( $omdb_url );
+                $omdb_results = apply_filters('check_json_api', $omdb_url);   
+                if (is_array($omdb_results) && array_key_exists("Poster", $omdb_results)) {
+                    $omdb_img_url = $omdb_results["Poster"];
+                    error_log( $omdb_img_url );
+                }
+
+                if ($omdb_img_url && $omdb_img_url !== "N/A") {
+                    //$coverImgUrl = $omdb_img_url;
+    error_log( "Trying to save thumbnail.... " . $omdb_img_url);
+                    // Upload and Save Thumbnail image
+                    apply_filters('save_cover_image', $omdb_img_url, $movieTitle, $post_id);
+                    //wp_publish_post( $post_id );
+    error_log( "Not going to publish... please verify thumbnail.");
+                    return;
+                }
+            }
+            if ($check === true || stripos($partNumber, 'season') !== false || stripos($altTitle, 'season ') !== false) {
+                error_log("Checking for series poster....");
+                $omdb_url = "http://www.omdbapi.com/?t=".urlencode($movieTitle)."&type=series&apikey=".$omdb_api; //$omdb_url = "http://www.omdbapi.com/?t=".urlencode($movieTitle)."&r=xml&apikey=".$omdb_api;
+                // Retrieve results from API - JSON
+                $omdb_results = apply_filters('check_json_api', $omdb_url);
+error_log( "OMDB results: ". var_export($omdb_results) );  
+                if (is_array($omdb_results) && array_key_exists("Poster", $omdb_results)) {
+                    $omdb_img_url = $omdb_results["Poster"];
+                    error_log( $omdb_img_url );
+                }
+                if ($omdb_img_url && $omdb_img_url !== "N/A") {
+                    //$coverImgUrl = $omdb_img_url;
+    error_log( "Trying to save thumbnail.... " . $omdb_img_url);
+                    // Upload and Save Thumbnail image
+                    apply_filters('save_cover_image', $omdb_img_url, $movieTitle, $post_id);
+                    //wp_publish_post( $post_id );
+    error_log( "Not going to publish... please verify thumbnail.");
+                    return;
+                }
+            }
+        }
+    }
 }
