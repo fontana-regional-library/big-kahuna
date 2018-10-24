@@ -167,6 +167,8 @@ class Fontana {
         $this->loader->add_action('init', $plugin_admin, 'registerSubjectsTaxonomy');
 				$this->loader->add_action('init', $plugin_admin, 'registerVendorsTaxonomy');
 				$this->loader->add_action('init', $plugin_admin, 'registerTopicsTaxonomy');
+				$this->loader->add_action( 'admin_menu', $plugin_admin, 'fontana_add_plugin_page' );
+				$this->loader->add_action( 'admin_init', $plugin_admin, 'fontana_page_init' );
 
     }
 

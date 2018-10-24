@@ -611,4 +611,89 @@ class Fontana_Admin {
         );
         register_taxonomy( 'topics', array( 'collection-item' ), $args );
     }
+    /**
+    *   Add Options Page
+    **/
+    public function fontana_add_plugin_page() {
+        // This page will be under "Settings"
+        add_options_page(
+            'Settings Admin', 
+            $this->plugin_name.' Settings', 
+            'install_plugins', 
+            'fontana-settings-admin', 
+            array( $this, 'fontana_create_admin_page' )
+        );
+    }
+    /**
+     * Options page callback
+     */
+    public function fontana_create_admin_page() {
+        require_once plugin_dir_path( __FILE__ ). 'partials/'.$this->plugin_name.'-admin-display.php';
+    }
+    /**
+     * Register Settings
+     */
+    public function fontana_page_init() {
+        register_setting(
+            $this->plugin_name, // Option group
+            $this->plugin_name, // Option name
+            array( $this, 'fontana_sanitize' ) // Sanitize
+        );
+        add_settings_section(
+            'dev_setting_section_id', // ID
+            'Deverloper Settings', // Title
+            array( $this, 'fontana_print_section_info' ), // Callback
+            'fontana-settings-admin' // Page
+        );  
+        add_settings_field(
+            'goodreads_APIKEY', // ID
+            'Good Reads API', // Title 
+            array( $this, 'goodreads_APIKEY_callback' ), // Callback
+            'fontana-settings-admin', // Page
+            'dev_setting_section_id' // Section           
+        );  
+        add_settings_field(
+            'omdb_APIKEY', // ID
+            'OMDB API', // Title 
+            array( $this, 'omdb_APIKEY_callback' ), // Callback
+            'fontana-settings-admin', // Page
+            'dev_setting_section_id' // Section           
+        );          
+    }
+    /**
+     * Sanitize each setting field as needed
+     *
+     * @param array $input Contains all settings fields as array keys
+     */
+    public function fontana_sanitize( $input ) {
+        $new_input = array();
+        if( isset( $input['goodreads_APIKEY'] ) ) {
+            $new_input['goodreads_APIKEY'] = sanitize_text_field( $input['goodreads_APIKEY'] );
+        }
+        if( isset( $input['omdb_APIKEY'] ) ) {
+            $new_input['omdb_APIKEY'] = sanitize_text_field( $input['omdb_APIKEY'] );
+        }
+        return $new_input;
+    }
+    /** 
+     * Print the Section text
+     */
+    public function fontana_print_section_info() {
+        print 'Enter your settings below:';
+    }
+    /** 
+     * Get the settings option array and print one of its values
+     */
+    public function goodreads_APIKEY_callback() {
+        printf(
+            '<input type="text" id="goodreads_APIKEY" name="'.$this->plugin_name.'[goodreads_APIKEY]" value="%s" />',
+            isset( $this->options['goodreads_APIKEY'] ) ? esc_attr( $this->options['goodreads_APIKEY']) : ''
+        );
+    }
+    public function omdb_APIKEY_callback() {
+        printf(
+            '<input type="text" id="omdb_APIKEY" name="'.$this->plugin_name.'[omdb_APIKEY]" value="%s" />',
+            isset( $this->options['omdb_APIKEY'] ) ? esc_attr( $this->options['omdb_APIKEY']) : ''
+        );
+    }
 }
