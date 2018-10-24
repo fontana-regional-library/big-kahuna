@@ -575,4 +575,40 @@ class Fontana_Admin {
         register_post_type( 'collection-item', $args );
 
     }
+    public function registerTopicsTaxonomy() {
+        $labels = array(
+            'name'                       => _x( 'Topics', 'Taxonomy General Name', 'fontana' ),
+            'singular_name'              => _x( 'Topic', 'Taxonomy Singular Name', 'fontana' ),
+            'menu_name'                  => __( 'Topics', 'fontana' ),
+            'all_items'                  => __( 'All Topics', 'fontana' ),
+            'parent_item'                => __( 'Parent Topic', 'fontana' ),
+            'parent_item_colon'          => __( 'Parent Topic:', 'fontana' ),
+            'new_item_name'              => __( 'New Topic Name', 'fontana' ),
+            'add_new_item'               => __( 'Add New Topic', 'fontana' ),
+            'edit_item'                  => __( 'Edit Topic', 'fontana' ),
+            'update_item'                => __( 'Update Topic', 'fontana' ),
+            'view_item'                  => __( 'View Topic', 'fontana' ),
+            'separate_items_with_commas' => __( 'Separate Topics with commas', 'fontana' ),
+            'add_or_remove_items'        => __( 'Add or remove Topics', 'fontana' ),
+            'choose_from_most_used'      => __( 'Choose from the most used', 'fontana' ),
+            'popular_items'              => __( 'Popular Topics', 'fontana' ),
+            'search_items'               => __( 'Search Topics', 'fontana' ),
+            'not_found'                  => __( 'Not Found', 'fontana' ),
+            'no_terms'                   => __( 'No Topics', 'fontana' ),
+            'items_list'                 => __( 'Topics list', 'fontana' ),
+            'items_list_navigation'      => __( 'Topics list navigation', 'fontana' ),
+        );
+        $args = array(
+            'labels'                     => $labels,
+            'hierarchical'               => true,
+            'public'                     => true,
+            'show_ui'                    => true,
+            'show_admin_column'          => true,
+            'show_in_nav_menus'          => true,
+            'show_tagcloud'              => true,
+            'show_in_rest'               => true,
+            'rest_base'                  => 'topics',
+        );
+        register_taxonomy( 'topics', array( 'collection-item' ), $args );
+    }
 }
