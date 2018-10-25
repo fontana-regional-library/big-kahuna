@@ -184,6 +184,7 @@ class Fontana {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action('rest_api_init', $plugin_public, 'registerMenusWithApi');
 		$this->loader->add_action('rest_api_init', $plugin_public, 'register_images_field' );
+		$this->loader->add_filter('tribe_rest_event_data', $plugin_public, 'add_event_api_data', 10, 2);
 	}
 
 	/**

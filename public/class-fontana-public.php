@@ -181,4 +181,10 @@ class Fontana_Public {
 			return false;
 		}
 	}
+	public function add_event_api_data($data, $event) {	
+		$event_id = $data['id'];	
+		$services = get_the_terms( $event_id, 'services' );
+		$data["services"] = $services;
+				return $data;
+		}
 }
