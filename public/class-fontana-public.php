@@ -182,9 +182,13 @@ class Fontana_Public {
 		}
 	}
 	public function add_event_api_data($data, $event) {	
-		$event_id = $data['id'];	
-		$services = get_the_terms( $event_id, 'services' );
-		$data["acf"]["services"] = $services;
-				return $data;
+		if (is_plugin_active('the-events-calendar/the-events-calendar.php')) {
+			$event_id = $data['id'];	
+			$services = get_the_terms( $event_id, 'services' );
+			$locations = get_the_terms( $event_id, 'location' );
+			$data["acf"]["services"] = $services;
+			$data["acf"]["locations"] = $locations;
+			}
+			return $data;
 		}
 }
