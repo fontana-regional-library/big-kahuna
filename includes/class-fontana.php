@@ -184,7 +184,15 @@ class Fontana {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action('rest_api_init', $plugin_public, 'registerMenusWithApi');
 		$this->loader->add_action('rest_api_init', $plugin_public, 'register_images_field' );
-		$this->loader->add_filter('tribe_rest_event_data', $plugin_public, 'add_event_api_data', 10, 2);
+		$this->loader->add_filter('tribe_rest_event_data', $plugin_public, 'add_tribe_event_data', 10, 2);
+		
+		// Register hooks related to custom events api
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-fontana-events-api.php';
+		$events_api = new Fontana_Events_API($this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action('rest_api_init', $events_api, 'register_api_fields' );
+		$this->loader->add_filter( 'register_post_type_args', $events_api, 'events_api', 10, 2 );
+		$this->loader->add_filter( 'rest_tribe_events_query', $events_api, 'events_api_upcoming',10, 2);
+		$this->loader->add_filter( 'rest_prepare_tribe_events', $events_api, 'events_api_response', 10, 3);
 	}
 
 	/**

@@ -136,7 +136,7 @@ class Fontana_Public {
         return $menu;
 	}
 	public function register_images_field() {
-		register_rest_field( array('collection-item','post'), 'featured_image',
+		register_rest_field( array('collection-item','post','tribe_events'), 'featured_image',
         array(
           'get_callback'    => array( $this, 'get_image_url_full'),
           'update_callback' => null,
@@ -178,10 +178,10 @@ class Fontana_Public {
 			$url = $img_arr[0];
 			return $url;
 		} else {
-			return false;
+			return "";
 		}
 	}
-	public function add_event_api_data($data, $event) {	
+	public function add_tribe_event_data($data, $event) {	
 		if (is_plugin_active('the-events-calendar/the-events-calendar.php')) {
 			$event_id = $data['id'];	
 			$services = get_the_terms( $event_id, 'services' );
