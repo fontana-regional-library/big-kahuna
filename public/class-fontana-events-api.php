@@ -131,25 +131,11 @@ class Fontana_Events_API extends Fontana_Public {
 
 			// add start_date_details
 			$start = $data->data['start_date'];
-			$data->data['start_date_details'] = array (
-				"year" => substr($start, 0, 4),
-				"month" => substr($start, 5, 2),
-				"day" => substr($start, 8, 2),
-				"hour" => substr($start, 11, 2),
-				"minutes" => substr($start, 14, 2),
-				"seconds" => substr($start, 17, 2)
-			);
+			$data->data['start_date_details'] = $this->get_date_details($start);
 
 			// add end_date_details
 			$end = $data->data['end_date'];
-			$data->data['end_date_details'] = array (
-				"year" => substr($end, 0, 4),
-				"month" => substr($end, 5, 2),
-				"day" => substr($end, 8, 2),
-				"hour" => substr($end, 11, 2),
-				"minutes" => substr($end, 14, 2),
-				"seconds" => substr($end, 17, 2)
-			);
+			$data->data['end_date_details'] = $this->get_date_details($end);
 
 			//filter out unneeded stuff
 			//unset($data->data['author']);
@@ -186,7 +172,7 @@ class Fontana_Events_API extends Fontana_Public {
 
 	// Build image array
 	function get_image_data( $image_id ){
-		$full_url = get_attachment_link( $image_id );
+		$full_url = wp_get_attachment_image_url( $image_id, 'full' );
 		$file     = get_attached_file( $image_id );
 
 		$data = array(
@@ -216,6 +202,31 @@ class Fontana_Events_API extends Fontana_Public {
 		return $data;
 	}
 	
+	// Get Date Details
+	function get_date_details( $date ) {
+		if ( empty( $date ) ) {
+			return array(
+				'year'    => '',
+				'month'   => '',
+				'day'     => '',
+				'hour'    => '',
+				'minutes' => '',
+				'seconds' => '',
+			);
+		}
+
+		$time = strtotime( $date );
+
+		return array(
+			'year'    => date( 'Y', $time ),
+			'month'   => date( 'm', $time ),
+			'day'     => date( 'd', $time ),
+			'hour'    => date( 'H', $time ),
+			'minutes' => date( 'i', $time ),
+			'seconds' => date( 's', $time ),
+		);
+	}
+
 	// Callback: Get Start Date meta for tribe_events
 	function get_start_date(){
 		$id = get_the_ID();
