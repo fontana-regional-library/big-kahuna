@@ -156,7 +156,7 @@ class Fontana_Events_API extends Fontana_Public {
 			unset($data->data['link']);
 			unset($data->data['modified']);
 			unset($data->data['modified_gmt']);
-			unset($data->data['slug']);
+			//unset($data->data['slug']);
 			unset($data->data['status']);
 			unset($data->data['type']);
 			unset($data->data['categories']);
