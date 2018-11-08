@@ -28,33 +28,6 @@ class Fontana_Events_API extends Fontana_Public {
 	// Register fields to display in the REST API
 	public function register_api_fields() {
 
-		// Add image url
-		register_rest_field( array('tribe_events'), 'image',
-		array(
-			'get_callback'    => array( $this, 'get_image_url'),
-			'update_callback' => null,
-			'schema'          => null,
-		)
-	);
-
-		// Add location slugs to custom tribe events feed
-		register_rest_field( array('post', 'page', 'actions', 'resources', 'tribe_events'), 'location',
-			array(
-				'get_callback'    => array( $this, 'get_location'),
-				'update_callback' => null,
-				'schema'          => null,
-			)
-		);
-
-		// Add services slugs to custom tribe events feed
-		register_rest_field( array('post', 'page', 'actions', 'resources', 'tribe_events'), 'services',
-			array(
-				'get_callback'    => array( $this, 'get_services'),
-				'update_callback' => null,
-				'schema'          => null,
-			)
-		);
-
 		// Add "Start Date" post-meta to custom tribe events feed
 		register_rest_field( array('tribe_events'), 'start_date',
 			array(
@@ -152,13 +125,34 @@ class Fontana_Events_API extends Fontana_Public {
 			$data->data['content'] = $data->data['content']['rendered'];
 			$data->data['excerpt'] = $data->data['excerpt']['rendered'];
 		
-			$image_url = $data->data['image'];
+			$imageId = get_post_meta( $post->ID, '_thumbnail_id', true );
 
-			$data->data['image'] = array();
-			$data->data['image']['url'] = $image_url;
+			$data->data['image'] = $this->get_image_data($imageId);
+
+			// add start_date_details
+			$start = $data->data['start_date'];
+			$data->data['start_date_details'] = array (
+				"year" => substr($start, 0, 4),
+				"month" => substr($start, 5, 2),
+				"day" => substr($start, 8, 2),
+				"hour" => substr($start, 11, 2),
+				"minutes" => substr($start, 14, 2),
+				"seconds" => substr($start, 17, 2)
+			);
+
+			// add end_date_details
+			$end = $data->data['end_date'];
+			$data->data['end_date_details'] = array (
+				"year" => substr($end, 0, 4),
+				"month" => substr($end, 5, 2),
+				"day" => substr($end, 8, 2),
+				"hour" => substr($end, 11, 2),
+				"minutes" => substr($end, 14, 2),
+				"seconds" => substr($end, 17, 2)
+			);
 
 			//filter out unneeded stuff
-			unset($data->data['author']);
+			//unset($data->data['author']);
 			unset($data->data['link']);
 			unset($data->data['modified']);
 			unset($data->data['modified_gmt']);
@@ -187,20 +181,39 @@ class Fontana_Events_API extends Fontana_Public {
 			$data->remove_link( 'https://api.w.org/term' );
 			$data->remove_link( 'curies' );
 						
-		//error_log(print_r($response;))
 		return $data; 
 	}
 
-	// Get Image: Full
-	function get_image_url(){
-		$id = get_the_ID();
-		if ( has_post_thumbnail( $id ) ){
-			$img_arr = wp_get_attachment_image_src( get_post_thumbnail_id( $id ), 'full' );
-			$url = $img_arr[0];
-			return $url;
-		} else {
-			return "";
+	// Build image array
+	function get_image_data( $image_id ){
+		$full_url = get_attachment_link( $image_id );
+		$file     = get_attached_file( $image_id );
+
+		$data = array(
+			'url'       => $full_url,
+			'id'        => $image_id,
+			'extension' => pathinfo( $file, PATHINFO_EXTENSION ),
+		);
+
+		$metadata = wp_get_attachment_metadata( $image_id );
+
+		if (
+			false !== $metadata
+			&& isset( $metadata['image_meta'], $metadata['file'], $metadata['sizes'] )
+		) {
+			unset( $metadata['image_meta'], $metadata['file'] );
+
+			foreach ( $metadata['sizes'] as $size => &$meta ) {
+				$size_image_src = wp_get_attachment_image_src( $image_id, $size );
+				$meta['url']    = ! empty( $size_image_src[0] ) ? $size_image_src[0] : '';
+				unset( $meta['file'] );
+			}
+			unset( $meta );
+
+			$data = array_filter( array_merge( $data, $metadata ) );
 		}
+
+		return $data;
 	}
 	
 	// Callback: Get Start Date meta for tribe_events
@@ -216,32 +229,6 @@ class Fontana_Events_API extends Fontana_Public {
 		$endDate = get_post_meta($id, '_EventEndDate', true);
 		return $endDate;
 	}	
-	
-	// Callback: Get Services terms for tribe_events
-	function get_services(){
-		$id = get_the_ID();
-		$serviceTerms = get_the_terms($id, 'services');
-		if ( $serviceTerms && ! is_wp_error( $serviceTerms ) ) {
-			$serviceSlugs = array();
-			foreach ($serviceTerms as $serviceTerm) {
-				$services[] = $serviceTerm;
-			}
-			return $services;
-		}
-	}
-	
-	// Callback: Get Location terms for tribe_events
-	function get_location(){
-		$id = get_the_ID();
-		$locationTerms = get_the_terms($id, 'location');
-		if ( $locationTerms && ! is_wp_error( $locationTerms ) ) {
-			$locationSlugs = array();
-			foreach ($locationTerms as $locationTerm) {
-				$locations[] = $locationTerm;
-			}
-			return $locations;
-		}
-	}
 	
 	// Callback: Get Venue Data for tribe_events
 	function get_venue(){
