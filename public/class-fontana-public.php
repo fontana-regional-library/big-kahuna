@@ -190,5 +190,50 @@ class Fontana_Public {
 			$data["acf"]["locations"] = $locations;
 			}
 			return $data;
+    }
+    /**
+	 * 
+	 * Sort collection items by record creation date and add filters for collection and type.
+	 * 
+	 * https://developer.wordpress.org/reference/hooks/rest_this-post_type_query/
+	 * 
+	 */
+	function collection_api_newest($args, $request) {
+		$meta_query = array();
+		
+		$args['orderby'] = 'meta_value';
+		$args['order'] = 'DESC';
+		$args['meta_key'] = 'record_creation_date';
+
+    if($request['collection']) {
+			$collectionQuery = array(
+				'key'	=>	'collection',
+				'value' => $request['collection'],
+				'compare' => 'LIKE'
+        );
+      $meta_query[]=$collectionQuery;
 		}
+
+		if($request['form']) {
+			$itemFormQuery = array(
+        array(
+          'relation' => 'OR',
+          array(
+            'key'	=>	'form',
+            'value' => $request['form'],
+            'compare' => 'LIKE'
+          ),
+          array(
+            'key'	=>	'item_type',
+            'value' => $request['form'],
+            'compare' => 'LIKE'
+          ),
+        )
+      );
+			$meta_query[]=$itemFormQuery;
+		}
+
+		$args['meta_query'] = $meta_query; 
+		return $args;
+	}
 }
