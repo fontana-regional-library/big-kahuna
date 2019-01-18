@@ -1,0 +1,77 @@
+Additional Taxonomies:
+    - Keywords
+    - Topics?
+    - Shelf Locations
+    -
+
+Custom Fields Changes:
+  - Collection items
+      -
+  - Terms
+      -
+
+Collection API 
+  - sorted by record create date
+  - additional query params?
+
+Fontana Settings page
+  - API settings
+  - OverDrive Library Settings
+  - Collection Actions
+  - additional columns when viewing collection items list
+  - custom upload directory for collection item thumbnails
+  - custom bulk actions (verify & publish, check holdings[retrieves item records])
+
+=== Big Kahuna Importing ===
+
+The import functions process imports for Evergreen and Overdrive catalogs, and a framework for getting additional
+information about collection items that are imported.
+
+== Description ==
+
+Uses WP All Import to trigger base record retrieval.
+
+== Setup ==
+1. Setup/import ACF Fields
+2. Configure taxonomy importers
+2. Import Shelf and Keyword Taxonomies
+3. Configure Fontana Settings
+4. Configure Importers
+
+== ACF FIELDS ==
+ACF Fields have been added to facilitate processing. "acf-FIELDS-TEMPLATE-export-2018-12-20.json" is located in the
+docs folder. Includes some rearranging, additions of collection item ACF fields, Term fields for new shelf and keyword taxonomies, and
+shelf_location_id field for shelf taxonomy.
+
+== Shelf and Keywords Taxonomies ==
+Two additional taxonomies are created to provide a more dynamic way of retrieving holdings information and processing items for 
+tagging/classfication.
+
+* Shelf - fixed list (taken from Evergreen Catalog), also includes overdrive library ids. The docs/term-lists folder includes
+shelf.json to import via WP ALL import, as well as IMPORT_TEMPLATE_shelf.txt to assist with importing shelf terms.
+* Keywords - Parent terms are used to organize by purpose/function. Parent terms should be imported first usng the
+keyword-import1.csv file in docs/term-lists (Includes terms and descriptions). There is a list of child terms (keyword-import2.json)
+and a WP All Import Template (IMPORT_TEMPLATE_child-keywords.txt) in the term-lists folder.
+
+== Fontana Settings ==
+Settings page added to store API keys, Overdrive Library Ids and collection import ids (not in use).
+1. Configure API settings.
+2. Add Overdrive Library name and ID (if API settings are configured, the other information about the overdrive library will be
+retrieved).
+3. Failed records check can be triggered from settings page (if item record retrieval has failed.)
+4. Check Evergreen query queries the oldest evergreen records (older than 30 days) to check that items are still in holdings.
+5. Update Cached term list will update the option that stores term/taxonomy info for item classification.
+
+== Importers ==
+Currently, 3 importers need to be setup. 
+1. Evergreen (Import Template is in the docs folder): Importing new items(FONTANA is the institution name, 1 is the result page, 200 is number of items): 
+http://nccardinal.org/opac/extras/browse/mods3/item-age/FONTANA/1/200
+2. E-iNC Library import (Import Template is in the docs folder)
+3. NC Kids Library import (Import Template is in the docs folder)
+
+Overdrive libraries are imported via function entered into the url field: "[overdrive_library_download(IDNUMBER)]"
+The import should be scheduled via cron to run (20,000+ records total / imports 250 records each time ~ 84 cycles for complete import).
+An option is stored to keep track of progress/place in the import cycle.
+After a full import has completed, a trigger will check items that haven't been updated since the last update and check the meta record
+to see if the item is still available to the library. If the item is not currently owned, the title is flagged and trashed.
+Another full import/check should take place in 1 week.

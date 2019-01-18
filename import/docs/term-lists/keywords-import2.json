@@ -1,0 +1,1680 @@
+[
+  {
+    "name": "[e]",
+    "parent": "Dewey Key",
+    "genres": "easy",
+    "audience": "juvenile"
+  },
+  {
+    "name": "[fic]",
+    "parent": "Dewey Key",
+    "genres": "fiction",
+    "audience": ""
+  },
+  {
+    "name": "[jf]",
+    "parent": "Dewey Key",
+    "genres": "fiction",
+    "audience": "juvenile"
+  },
+  {
+    "name": "b",
+    "parent": "Dewey Key",
+    "genres": "biography",
+    "audience": ""
+  },
+  {
+    "name": "contains",
+    "parent": "Dewey Key",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "e",
+    "parent": "Dewey Key",
+    "genres": "easy",
+    "audience": "juvenile"
+  },
+  {
+    "name": "ends",
+    "parent": "Dewey Key",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "fic",
+    "parent": "Dewey Key",
+    "genres": "fiction",
+    "audience": ""
+  },
+  {
+    "name": "j",
+    "parent": "Dewey Key",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "jf_",
+    "parent": "Dewey Key",
+    "genres": "fiction",
+    "audience": "juvenile"
+  },
+  {
+    "name": "magazine",
+    "parent": "Dewey Key",
+    "genres": "magazines-periodicals",
+    "audience": ""
+  },
+  {
+    "name": "starts",
+    "parent": "Dewey Key",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "blu-ray videorecording",
+    "parent": "Form",
+    "genres": "video",
+    "audience": ""
+  },
+  {
+    "name": "dvd",
+    "parent": "Form",
+    "genres": "video",
+    "audience": ""
+  },
+  {
+    "name": "dvd videorecording",
+    "parent": "Form",
+    "genres": "video",
+    "audience": ""
+  },
+  {
+    "name": "large print",
+    "parent": "Form",
+    "genres": "large-print",
+    "audience": ""
+  },
+  {
+    "name": "large type",
+    "parent": "Form",
+    "genres": "large-print",
+    "audience": ""
+  },
+  {
+    "name": "print",
+    "parent": "Form",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "puzzle",
+    "parent": "Form",
+    "genres": "puzzle",
+    "audience": ""
+  },
+  {
+    "name": "serial",
+    "parent": "Form",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "sound recording",
+    "parent": "Form",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "videorecording (dvd)",
+    "parent": "Form",
+    "genres": "video",
+    "audience": ""
+  },
+  {
+    "name": "abstract or summary",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "adolescent",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": "young-adult"
+  },
+  {
+    "name": "adult",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": "adult"
+  },
+  {
+    "name": "art original",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "art reproduction",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "article",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "atlas",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "autobiography",
+    "parent": "Marc Terms",
+    "genres": "biography",
+    "audience": ""
+  },
+  {
+    "name": "bibliography",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "biography",
+    "parent": "Marc Terms",
+    "genres": "biography",
+    "audience": ""
+  },
+  {
+    "name": "book",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "calendar",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "catalog",
+    "parent": "Marc Terms",
+    "genres": "magazines-periodicals",
+    "audience": ""
+  },
+  {
+    "name": "chart",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "comedy",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "comic or graphic novel",
+    "parent": "Marc Terms",
+    "genres": "graphic-novel",
+    "audience": ""
+  },
+  {
+    "name": "conference publication",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "database",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "dictionary",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "diorama",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "directory",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "discography",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "document (computer)",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "drama",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "encyclopedia",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "essay",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "festschrift",
+    "parent": "Marc Terms",
+    "genres": "biography",
+    "audience": ""
+  },
+  {
+    "name": "fiction",
+    "parent": "Marc Terms",
+    "genres": "fiction",
+    "audience": ""
+  },
+  {
+    "name": "filmography",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "filmstrip",
+    "parent": "Marc Terms",
+    "genres": "video",
+    "audience": ""
+  },
+  {
+    "name": "finding aid",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "flash card",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "folktale",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "font",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "game",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "general",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": "adult"
+  },
+  {
+    "name": "globe",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "government publication",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "graphic",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "handbook",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "history",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "humor, satire",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "hymnal",
+    "parent": "Marc Terms",
+    "genres": "music",
+    "audience": ""
+  },
+  {
+    "name": "index",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "instruction",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "interview",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "issue",
+    "parent": "Marc Terms",
+    "genres": "magazines-periodicals",
+    "audience": ""
+  },
+  {
+    "name": "journal",
+    "parent": "Marc Terms",
+    "genres": "magazines-periodicals",
+    "audience": ""
+  },
+  {
+    "name": "juvenile",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "kit",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "language instruction",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "law report or digest",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "legal article",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "legal case and case notes",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "legislation",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "letter",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "loose-leaf",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "map",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "memoir",
+    "parent": "Marc Terms",
+    "genres": "biography",
+    "audience": ""
+  },
+  {
+    "name": "microscope slide",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "model",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "motion picture",
+    "parent": "Marc Terms",
+    "genres": "video",
+    "audience": ""
+  },
+  {
+    "name": "multivolume monograph",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "newspaper",
+    "parent": "Marc Terms",
+    "genres": "magazines-periodicals",
+    "audience": ""
+  },
+  {
+    "name": "nonmusical sound",
+    "parent": "Marc Terms",
+    "genres": "audiobook",
+    "audience": ""
+  },
+  {
+    "name": "novel",
+    "parent": "Marc Terms",
+    "genres": "fiction",
+    "audience": ""
+  },
+  {
+    "name": "numeric data",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "offprint",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "online system or service",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "patent",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "periodical",
+    "parent": "Marc Terms",
+    "genres": "magazines-periodicals",
+    "audience": ""
+  },
+  {
+    "name": "picture",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "poetry",
+    "parent": "Marc Terms",
+    "genres": "poetry-rhyme",
+    "audience": ""
+  },
+  {
+    "name": "pre-adolescent",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "preschool",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "primary",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "programmed text",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "realia",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "rehearsal",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "remote sensing image",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "reporting",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "review",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "script",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "series",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "short story",
+    "parent": "Marc Terms",
+    "genres": "fiction",
+    "audience": ""
+  },
+  {
+    "name": "slide",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "sound",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "specialized",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "speech",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "standard or specification",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "statistics",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "survey of literature",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "technical drawing",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "technical report",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "thesis",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "toy",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "transparency",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "treaty",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "videorecording",
+    "parent": "Marc Terms",
+    "genres": "video",
+    "audience": ""
+  },
+  {
+    "name": "web site",
+    "parent": "Marc Terms",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "yearbook",
+    "parent": "Marc Terms",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "action and adventure comics",
+    "parent": "Other",
+    "genres": "graphic-novel",
+    "audience": ""
+  },
+  {
+    "name": "action and adventure films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "action and adventure television programs",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "animal films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "animated films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": "juvenile"
+  },
+  {
+    "name": "animated television programs",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "audiobooks",
+    "parent": "Other",
+    "genres": "audiobook",
+    "audience": ""
+  },
+  {
+    "name": "autobiographical fiction",
+    "parent": "Other",
+    "genres": "biography",
+    "audience": ""
+  },
+  {
+    "name": "autobiographies",
+    "parent": "Other",
+    "genres": "biography",
+    "audience": ""
+  },
+  {
+    "name": "biographical films",
+    "parent": "Other",
+    "genres": "video",
+    "audience": "juvenile"
+  },
+  {
+    "name": "biographies",
+    "parent": "Other",
+    "genres": "biography",
+    "audience": ""
+  },
+  {
+    "name": "biography &amp; autobiography",
+    "parent": "Other",
+    "genres": "biography",
+    "audience": ""
+  },{
+    "name": "cookbook",
+    "parent": "Other",
+    "genres": "nonfiction",
+    "audience": ""
+  },{
+    "name": "cookbooks",
+    "parent": "Other",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "board books",
+    "parent": "Other",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "books for teen girls",
+    "parent": "Other",
+    "genres": "",
+    "audience": "young-adult"
+  },
+  {
+    "name": "books for teens",
+    "parent": "Other",
+    "genres": "",
+    "audience": "young-adult"
+  },
+  {
+    "name": "children's",
+    "parent": "Other",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "children's films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": "juvenile"
+  },
+  {
+    "name": "children's stories",
+    "parent": "Other",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "christian fiction",
+    "parent": "Other",
+    "genres": "christian-fiction",
+    "audience": ""
+  },
+  {
+    "name": "comedy films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "comic books, strips, etc",
+    "parent": "Other",
+    "genres": "graphic-novel",
+    "audience": ""
+  },
+  {
+    "name": "comics (graphic works)",
+    "parent": "Other",
+    "genres": "graphic-novel",
+    "audience": ""
+  },
+  {
+    "name": "contains",
+    "parent": "Other",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "cookbooks",
+    "parent": "Other",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "crime films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "detective and mystery comics",
+    "parent": "Other",
+    "genres": "graphic-novel,mystery",
+    "audience": ""
+  },
+  {
+    "name": "detective and mystery fiction",
+    "parent": "Other",
+    "genres": "mystery",
+    "audience": ""
+  },
+  {
+    "name": "detective and mystery films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "detective and mystery television programs",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "dictionaries",
+    "parent": "Other",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "disaster films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "documentary films",
+    "parent": "Other",
+    "genres": "documentary",
+    "audience": ""
+  },
+  {
+    "name": "documentary television programs",
+    "parent": "Other",
+    "genres": "documentary,television",
+    "audience": ""
+  },
+  {
+    "name": "encyclopedias",
+    "parent": "Other",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "ends",
+    "parent": "Other",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "erotic fiction",
+    "parent": "Other",
+    "genres": "romance",
+    "audience": ""
+  },
+  {
+    "name": "essays",
+    "parent": "Other",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "fantasy comics",
+    "parent": "Other",
+    "genres": "graphic-novel,fantasy",
+    "audience": ""
+  },
+  {
+    "name": "fantasy fiction",
+    "parent": "Other",
+    "genres": "fantasy",
+    "audience": ""
+  },
+  {
+    "name": "fantasy films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "fantasy television programs",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "feature films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "fiction films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "film adaptations",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "ghost films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "graphic novels",
+    "parent": "Other",
+    "genres": "graphic-novel",
+    "audience": ""
+  },
+  {
+    "name": "historical films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "historical television programs",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "humorous comics",
+    "parent": "Other",
+    "genres": "graphic-novel",
+    "audience": ""
+  },
+  {
+    "name": "juvenile fiction",
+    "parent": "Other",
+    "genres": "fiction",
+    "audience": "juvenile"
+  },
+  {
+    "name": "juvenile literature",
+    "parent": "Other",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "juvenile works",
+    "parent": "Other",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "large type books",
+    "parent": "Other",
+    "genres": "large-print",
+    "audience": ""
+  },
+  {
+    "name": "legal films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "lg",
+    "parent": "Other",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "live-action\/animation films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "made-for-tv movies",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "magazines",
+    "parent": "Other",
+    "genres": "magazines-periodicals",
+    "audience": ""
+  },
+  {
+    "name": "mg",
+    "parent": "Other",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "monster films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "musical films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "mystery and detective stories",
+    "parent": "Other",
+    "genres": "mystery",
+    "audience": ""
+  },
+  {
+    "name": "mystery fiction",
+    "parent": "Other",
+    "genres": "mystery",
+    "audience": ""
+  },
+  {
+    "name": "mystery films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "mystery television programs",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "non-fiction",
+    "parent": "Other",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "nonfiction television programs",
+    "parent": "Other",
+    "genres": "documentary,television",
+    "audience": ""
+  },
+  {
+    "name": "paranormal comics",
+    "parent": "Other",
+    "genres": "graphic-novel",
+    "audience": ""
+  },
+  {
+    "name": "picture book fiction",
+    "parent": "Other",
+    "genres": "fiction",
+    "audience": "juvenile"
+  },
+  {
+    "name": "religious fiction",
+    "parent": "Other",
+    "genres": "christian-fiction",
+    "audience": ""
+  },
+  {
+    "name": "romance fiction",
+    "parent": "Other",
+    "genres": "romance",
+    "audience": ""
+  },
+  {
+    "name": "romance films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "romance television programs",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "romantic comedy films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "romantic suspense fiction",
+    "parent": "Other",
+    "genres": "romance",
+    "audience": ""
+  },
+  {
+    "name": "science fiction comics",
+    "parent": "Other",
+    "genres": "graphic-novel,science-fiction",
+    "audience": ""
+  },
+  {
+    "name": "science fiction television programs",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "spy comics",
+    "parent": "Other",
+    "genres": "graphic-novel",
+    "audience": ""
+  },
+  {
+    "name": "spy films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "starts",
+    "parent": "Other",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "steampunk comics",
+    "parent": "Other",
+    "genres": "graphic-novel",
+    "audience": ""
+  },
+  {
+    "name": "stories in rhyme",
+    "parent": "Other",
+    "genres": "poetry-rhyme",
+    "audience": ""
+  },
+  {
+    "name": "superhero comic books, strips, etc",
+    "parent": "Other",
+    "genres": "graphic-novel",
+    "audience": ""
+  },
+  {
+    "name": "superhero comics",
+    "parent": "Other",
+    "genres": "graphic-novel",
+    "audience": ""
+  },
+  {
+    "name": "superhero films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "teen",
+    "parent": "Other",
+    "genres": "",
+    "audience": "young-adult"
+  },
+  {
+    "name": "teen boy books",
+    "parent": "Other",
+    "genres": "",
+    "audience": "young-adult"
+  },
+  {
+    "name": "teen fiction books",
+    "parent": "Other",
+    "genres": "fiction",
+    "audience": "young-adult"
+  },
+  {
+    "name": "teen romance books",
+    "parent": "Other",
+    "genres": "romance",
+    "audience": "young-adult"
+  },
+  {
+    "name": "television adaptations",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "television movies",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "television plays",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "television programs",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "television series",
+    "parent": "Other",
+    "genres": "television",
+    "audience": ""
+  },
+  {
+    "name": "toddler",
+    "parent": "Other",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "ug",
+    "parent": "Other",
+    "genres": "",
+    "audience": "young-adult"
+  },
+  {
+    "name": "vampire films",
+    "parent": "Other",
+    "genres": "feature-film",
+    "audience": ""
+  },
+  {
+    "name": "western fiction",
+    "parent": "Other",
+    "genres": "western",
+    "audience": ""
+  },
+  {
+    "name": "western stories",
+    "parent": "Other",
+    "genres": "western",
+    "audience": ""
+  },
+  {
+    "name": "ya books",
+    "parent": "Other",
+    "genres": "",
+    "audience": "young-adult"
+  },
+  {
+    "name": "young adult books",
+    "parent": "Other",
+    "genres": "",
+    "audience": "young-adult"
+  },
+  {
+    "name": "young adult fiction",
+    "parent": "Other",
+    "genres": "fiction",
+    "audience": "young-adult"
+  },
+  {
+    "name": "young adult nonfiction",
+    "parent": "Other",
+    "genres": "nonfiction",
+    "audience": "young-adult"
+  },
+  {
+    "name": "young adult romance",
+    "parent": "Other",
+    "genres": "romance",
+    "audience": "young-adult"
+  },
+  {
+    "name": "bilingual",
+    "parent": "Topic Keyword",
+    "genres": "foreign-language",
+    "audience": ""
+  },
+  {
+    "name": "bilingual books",
+    "parent": "Topic Keyword",
+    "genres": "foreign-language",
+    "audience": ""
+  },
+  {
+    "name": "bilingual materials",
+    "parent": "Topic Keyword",
+    "genres": "foreign-language",
+    "audience": ""
+  },
+  {
+    "name": "biling\u00fce",
+    "parent": "Topic Keyword",
+    "genres": "foreign-language",
+    "audience": ""
+  },
+  {
+    "name": "books fiction",
+    "parent": "Topic Keyword",
+    "genres": "fiction",
+    "audience": ""
+  },
+  {
+    "name": "books mystery",
+    "parent": "Topic Keyword",
+    "genres": "mystery",
+    "audience": ""
+  },
+  {
+    "name": "canadian poetry",
+    "parent": "Topic Keyword",
+    "genres": "poetry-rhyme",
+    "audience": ""
+  },
+  {
+    "name": "children",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "childrens",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "children's literature",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "children's poetry",
+    "parent": "Topic Keyword",
+    "genres": "poetry-rhyme",
+    "audience": "juvenile"
+  },
+  {
+    "name": "children's songs",
+    "parent": "Topic Keyword",
+    "genres": "poetry-rhyme",
+    "audience": "juvenile"
+  },
+  {
+    "name": "children's television programs",
+    "parent": "Topic Keyword",
+    "genres": "television",
+    "audience": "juvenile"
+  },
+  {
+    "name": "childrens books by age 1-3",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "classic children's books",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "comic books",
+    "parent": "Topic Keyword",
+    "genres": "graphic-novel",
+    "audience": ""
+  },
+  {
+    "name": "cooking",
+    "parent": "Topic Keyword",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "counting",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "crime fiction",
+    "parent": "Topic Keyword",
+    "genres": "fiction",
+    "audience": ""
+  },
+  {
+    "name": "detective and mystery stories",
+    "parent": "Topic Keyword",
+    "genres": "mystery",
+    "audience": ""
+  },
+  {
+    "name": "detective novels",
+    "parent": "Topic Keyword",
+    "genres": "fiction,mystery",
+    "audience": ""
+  },
+  {
+    "name": "es",
+    "parent": "Topic Keyword",
+    "genres": "foreign-language",
+    "audience": ""
+  },
+  {
+    "name": "fiction books",
+    "parent": "Topic Keyword",
+    "genres": "fiction",
+    "audience": ""
+  },
+  {
+    "name": "first day of school",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "genealogy",
+    "parent": "Topic Keyword",
+    "genres": "nonfiction",
+    "audience": ""
+  },
+  {
+    "name": "high school students",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "young-adult"
+  },
+  {
+    "name": "high schools",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "young-adult"
+  },
+  {
+    "name": "historical fiction",
+    "parent": "Topic Keyword",
+    "genres": "fiction",
+    "audience": ""
+  },
+  {
+    "name": "juvenile drama",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "juvenile fiction",
+    "parent": "Topic Keyword",
+    "genres": "fiction",
+    "audience": "juvenile"
+  },
+  {
+    "name": "juvenile films",
+    "parent": "Topic Keyword",
+    "genres": "feature-film",
+    "audience": "juvenile"
+  },
+  {
+    "name": "juvenile literature",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "juvenile poetry",
+    "parent": "Topic Keyword",
+    "genres": "poetry-rhyme",
+    "audience": "juvenile"
+  },
+  {
+    "name": "mysteries and thrillers",
+    "parent": "Topic Keyword",
+    "genres": "fiction,mystery",
+    "audience": ""
+  },
+  {
+    "name": "mystery novels",
+    "parent": "Topic Keyword",
+    "genres": "mystery",
+    "audience": ""
+  },
+  {
+    "name": "nursery rhymes",
+    "parent": "Topic Keyword",
+    "genres": "poetry-rhyme",
+    "audience": "juvenile"
+  },
+  {
+    "name": "picture books",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "picture puzzles",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": ""
+  },
+  {
+    "name": "popular music",
+    "parent": "Topic Keyword",
+    "genres": "music",
+    "audience": ""
+  },
+  {
+    "name": "spanish language",
+    "parent": "Topic Keyword",
+    "genres": "foreign-language",
+    "audience": ""
+  },
+  {
+    "name": "spanish language materials",
+    "parent": "Topic Keyword",
+    "genres": "foreign-language",
+    "audience": ""
+  },
+  {
+    "name": "survival fiction",
+    "parent": "Topic Keyword",
+    "genres": "fiction",
+    "audience": ""
+  },
+  {
+    "name": "teenage boys",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "young-adult"
+  },
+  {
+    "name": "teenage girls",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "young-adult"
+  },
+  {
+    "name": "teenagers",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "young-adult"
+  },
+  {
+    "name": "toddler books",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "toddler books ages 1-3",
+    "parent": "Topic Keyword",
+    "genres": "",
+    "audience": "juvenile"
+  },
+  {
+    "name": "moving image",
+    "parent": "Type",
+    "genres": "video",
+    "audience": ""
+  },
+  {
+    "name": "notated music",
+    "parent": "Type",
+    "genres": "music",
+    "audience": ""
+  },
+  {
+    "name": "sound recording-musical",
+    "parent": "Type",
+    "genres": "music",
+    "audience": ""
+  },
+  {
+    "name": "sound recording-nonmusical",
+    "parent": "Type",
+    "genres": "audiobook",
+    "audience": ""
+  }
+]
