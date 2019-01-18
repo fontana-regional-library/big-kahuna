@@ -1,0 +1,46 @@
+[
+    {
+        "key": "group_5c06f606b09e3",
+        "title": "Shelf Location ID",
+        "fields": [
+            {
+                "key": "field_5bf2f19eaf91d",
+                "label": "Shelf Location ID",
+                "name": "shelf_location_id",
+                "type": "number",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "min": 1,
+                "max": 99999,
+                "step": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "shelf"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": ""
+    }
+]

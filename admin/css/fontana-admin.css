@@ -2,3 +2,9 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+ .term-meta-term {
+   column-count:2;
+ }
+ .form-field.term-meta-term label{
+  display:inline;
+}

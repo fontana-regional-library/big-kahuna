@@ -1,0 +1,772 @@
+[
+  {
+    "name": "2869",
+    "description": "E-iNC Library",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": ""
+  },
+  {
+    "name": "7298",
+    "description": "NC Kids Digital Library",
+    "genres": "",
+    "audience": "juvenile",
+    "shelf_location_id": ""
+  },
+  {
+    "name": "Adult Audiobook",
+    "genres": "audiobook",
+    "audience": "adult",
+    "shelf_location_id": "3945"
+  },
+  {
+    "name": "Adult Biography",
+    "genres": "audiobook,biography",
+    "audience": "adult,juvenile",
+    "shelf_location_id": "3946"
+  },
+  {
+    "name": "Adult DVD Fiction",
+    "genres": "video",
+    "audience": "adult",
+    "shelf_location_id": "3947"
+  },
+  {
+    "name": "Adult DVD New",
+    "genres": "video",
+    "audience": "adult",
+    "shelf_location_id": "3948"
+  },
+  {
+    "name": "Adult DVD Nonfiction",
+    "genres": "video",
+    "audience": "adult",
+    "shelf_location_id": "3949"
+  },
+  {
+    "name": "Adult Fiction",
+    "genres": "fiction",
+    "audience": "adult",
+    "shelf_location_id": "3950"
+  },
+  {
+    "name": "Adult Fiction Christian",
+    "genres": "christian-fiction",
+    "audience": "adult",
+    "shelf_location_id": "3952"
+  },
+  {
+    "name": "Adult Fiction Display",
+    "genres": "fiction",
+    "audience": "adult",
+    "shelf_location_id": "3953"
+  },
+  {
+    "name": "Adult Fiction Oversize",
+    "genres": "fiction",
+    "audience": "adult",
+    "shelf_location_id": "3957"
+  },
+  {
+    "name": "Adult Fiction Paperback",
+    "genres": "fiction",
+    "audience": "adult",
+    "shelf_location_id": "3958"
+  },
+  {
+    "name": "Adult Foreign Language Audiobook",
+    "genres": "foreign-language,audiobook",
+    "audience": "adult",
+    "shelf_location_id": "3964"
+  },
+  {
+    "name": "Adult Foreign Language Fiction",
+    "genres": "foreign-language,fiction",
+    "audience": "adult",
+    "shelf_location_id": "3965"
+  },
+  {
+    "name": "Adult Foreign Language Nonfiction",
+    "genres": "foreign-language,nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "3966"
+  },
+  {
+    "name": "Adult Foreign Language Reference",
+    "genres": "foreign-language,nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "3967"
+  },
+  {
+    "name": "Adult Foreign Language Video",
+    "genres": "foreign-language,video",
+    "audience": "adult",
+    "shelf_location_id": "3968"
+  },
+  {
+    "name": "Adult Friends Rental",
+    "genres": "",
+    "audience": "adult",
+    "shelf_location_id": "4282"
+  },
+  {
+    "name": "Adult Kit",
+    "genres": "",
+    "audience": "adult",
+    "shelf_location_id": "3971"
+  },
+  {
+    "name": "Adult Large Print Biography",
+    "genres": "large-print,biography",
+    "audience": "adult",
+    "shelf_location_id": "3972"
+  },
+  {
+    "name": "Adult Large Print Fiction",
+    "genres": "large-print,fiction",
+    "audience": "adult",
+    "shelf_location_id": "3973"
+  },
+  {
+    "name": "Adult Large Print Fiction Paperback",
+    "genres": "large-print,fiction",
+    "audience": "adult",
+    "shelf_location_id": "3975"
+  },
+  {
+    "name": "Adult Large Print New Fiction",
+    "genres": "large-print,fiction",
+    "audience": "adult",
+    "shelf_location_id": "3977"
+  },
+  {
+    "name": "Adult Large Print New Nonfiction",
+    "genres": "large-print,nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "3979"
+  },
+  {
+    "name": "Adult Large Print Nonfiction",
+    "genres": "large-print,nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "3980"
+  },
+  {
+    "name": "Adult Magazine",
+    "genres": "magazines-periodicals",
+    "audience": "adult",
+    "shelf_location_id": "3984"
+  },
+  {
+    "name": "Adult Music",
+    "genres": "music",
+    "audience": "adult",
+    "shelf_location_id": "3985"
+  },
+  {
+    "name": "Adult New Audiobook",
+    "genres": "audiobook",
+    "audience": "adult",
+    "shelf_location_id": "3986"
+  },
+  {
+    "name": "Adult New Biography",
+    "genres": "biography",
+    "audience": "adult",
+    "shelf_location_id": "3987"
+  },
+  {
+    "name": "Adult New Fiction",
+    "genres": "fiction",
+    "audience": "adult",
+    "shelf_location_id": "3988"
+  },
+  {
+    "name": "Adult New Nonfiction",
+    "genres": "nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "3992"
+  },
+  {
+    "name": "Adult New Video",
+    "genres": "video",
+    "audience": "adult",
+    "shelf_location_id": "3993"
+  },
+  {
+    "name": "Adult Nonfiction",
+    "genres": "nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "3994"
+  },
+  {
+    "name": "Adult Nonfiction Casada Collection",
+    "genres": "nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "4129"
+  },
+  {
+    "name": "Adult Nonfiction Display",
+    "genres": "nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "3995"
+  },
+  {
+    "name": "Adult Nonfiction Oversize",
+    "genres": "nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "4002"
+  },
+  {
+    "name": "Adult Nonfiction Paperback",
+    "genres": "nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "4003"
+  },
+  {
+    "name": "Adult Reference",
+    "genres": "nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "4006"
+  },
+  {
+    "name": "Adult Storage Fiction",
+    "genres": "fiction",
+    "audience": "adult",
+    "shelf_location_id": "4007"
+  },
+  {
+    "name": "Adult Storage Music",
+    "genres": "music",
+    "audience": "adult",
+    "shelf_location_id": "4161"
+  },
+  {
+    "name": "Adult Storage Nonfiction",
+    "genres": "nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "4008"
+  },
+  {
+    "name": "Adult Storage Video",
+    "genres": "video",
+    "audience": "adult",
+    "shelf_location_id": "4009"
+  },
+  {
+    "name": "Adult Video",
+    "genres": "video",
+    "audience": "adult",
+    "shelf_location_id": "4010"
+  },
+  {
+    "name": "Barrister Shelf",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4175"
+  },
+  {
+    "name": "Child Development",
+    "genres": "nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "1148"
+  },
+  {
+    "name": "Desk- Childrens",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4012"
+  },
+  {
+    "name": "Desk- Circulation",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4013"
+  },
+  {
+    "name": "Desk- Reference",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4015"
+  },
+  {
+    "name": "Desk- Young Adult",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4016"
+  },
+  {
+    "name": "Easy",
+    "genres": "easy",
+    "audience": "juvenile",
+    "shelf_location_id": "4017"
+  },
+  {
+    "name": "Easy Boardbook",
+    "genres": "easy",
+    "audience": "juvenile",
+    "shelf_location_id": "4018"
+  },
+  {
+    "name": "Easy Foreign Language",
+    "genres": "foreign-language,easy",
+    "audience": "juvenile",
+    "shelf_location_id": "4020"
+  },
+  {
+    "name": "Easy New",
+    "genres": "easy",
+    "audience": "juvenile",
+    "shelf_location_id": "4022"
+  },
+  {
+    "name": "Easy Reader",
+    "genres": "easy",
+    "audience": "juvenile",
+    "shelf_location_id": "4023"
+  },
+  {
+    "name": "Easy Reading Rover",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4186"
+  },
+  {
+    "name": "Education Center",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4187"
+  },
+  {
+    "name": "Education Center Juvenile",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4188"
+  },
+  {
+    "name": "Equipment",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4024"
+  },
+  {
+    "name": "Equipment Reading Rover",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4190"
+  },
+  {
+    "name": "Fontana HQ",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4191"
+  },
+  {
+    "name": "Games",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4025"
+  },
+  {
+    "name": "Genealogy",
+    "genres": "nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "4026"
+  },
+  {
+    "name": "Interlibrary Loans",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "1228"
+  },
+  {
+    "name": "Juvenile Audiobook",
+    "genres": "audiobook",
+    "audience": "juvenile",
+    "shelf_location_id": "4027"
+  },
+  {
+    "name": "Juvenile Audiobook Reading Rover",
+    "genres": "",
+    "audience": "juvenile",
+    "shelf_location_id": "4196"
+  },
+  {
+    "name": "Juvenile Biography",
+    "genres": "biography",
+    "audience": "juvenile",
+    "shelf_location_id": "4028"
+  },
+  {
+    "name": "Juvenile Boardbook",
+    "genres": "easy",
+    "audience": "juvenile",
+    "shelf_location_id": "4029"
+  },
+  {
+    "name": "Juvenile Disney Fiction",
+    "genres": "fiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4197"
+  },
+  {
+    "name": "Juvenile Fiction",
+    "genres": "fiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4030"
+  },
+  {
+    "name": "Juvenile Fiction Battle of the Book",
+    "genres": "fiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4031"
+  },
+  {
+    "name": "Juvenile Fiction Oversize",
+    "genres": "fiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4034"
+  },
+  {
+    "name": "Juvenile Fiction Paperback",
+    "genres": "fiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4035"
+  },
+  {
+    "name": "Juvenile Fiction Reading Rover",
+    "genres": "",
+    "audience": "juvenile",
+    "shelf_location_id": "4208"
+  },
+  {
+    "name": "Juvenile Fiction Reading Rover Boardbook",
+    "genres": "",
+    "audience": "juvenile",
+    "shelf_location_id": "4209"
+  },
+  {
+    "name": "Juvenile Fiction Series",
+    "genres": "fiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4036"
+  },
+  {
+    "name": "Juvenile Foreign Language Fiction",
+    "genres": "foreign-language,fiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4039"
+  },
+  {
+    "name": "Juvenile Foreign Language Nonfiction",
+    "genres": "foreign-language,nonfiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4041"
+  },
+  {
+    "name": "Juvenile Foreign Language Reference",
+    "genres": "foreign-language,nonfiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4042"
+  },
+  {
+    "name": "Juvenile Graphic Novel",
+    "genres": "graphic-novel",
+    "audience": "juvenile",
+    "shelf_location_id": "4043"
+  },
+  {
+    "name": "Juvenile Kit",
+    "genres": "",
+    "audience": "juvenile",
+    "shelf_location_id": "4044"
+  },
+  {
+    "name": "Juvenile Kit Reading Rover",
+    "genres": "",
+    "audience": "juvenile",
+    "shelf_location_id": "4284"
+  },
+  {
+    "name": "Juvenile Magazine",
+    "genres": "magazines-periodicals",
+    "audience": "juvenile",
+    "shelf_location_id": "4045"
+  },
+  {
+    "name": "Juvenile Music",
+    "genres": "music",
+    "audience": "juvenile",
+    "shelf_location_id": "4046"
+  },
+  {
+    "name": "Juvenile Music Reading Rover",
+    "genres": "",
+    "audience": "juvenile",
+    "shelf_location_id": "4218"
+  },
+  {
+    "name": "Juvenile New Fiction",
+    "genres": "fiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4048"
+  },
+  {
+    "name": "Juvenile New Fiction Reading Rover",
+    "genres": "",
+    "audience": "juvenile",
+    "shelf_location_id": "4220"
+  },
+  {
+    "name": "Juvenile New Nonfiction",
+    "genres": "nonfiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4050"
+  },
+  {
+    "name": "Juvenile New Video",
+    "genres": "video",
+    "audience": "juvenile",
+    "shelf_location_id": "4051"
+  },
+  {
+    "name": "Juvenile Nonfiction",
+    "genres": "nonfiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4053"
+  },
+  {
+    "name": "Juvenile Nonfiction Battle of the Book",
+    "genres": "nonfiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4054"
+  },
+  {
+    "name": "Juvenile Nonfiction Casada Collection Paperback",
+    "genres": "nonfiction",
+    "audience": "adult",
+    "shelf_location_id": "4286"
+  },
+  {
+    "name": "Juvenile Nonfiction Oversize",
+    "genres": "nonfiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4055"
+  },
+  {
+    "name": "Juvenile Nonfiction Reading Rover",
+    "genres": "",
+    "audience": "juvenile",
+    "shelf_location_id": "4226"
+  },
+  {
+    "name": "Juvenile Nonfiction Series",
+    "genres": "nonfiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4056"
+  },
+  {
+    "name": "Juvenile Reader",
+    "genres": "",
+    "audience": "juvenile",
+    "shelf_location_id": "4057"
+  },
+  {
+    "name": "Juvenile Reader Concepts",
+    "genres": "nonfiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4319"
+  },
+  {
+    "name": "Juvenile Reference",
+    "genres": "nonfiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4058"
+  },
+  {
+    "name": "Juvenile Storage Fiction",
+    "genres": "fiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4059"
+  },
+  {
+    "name": "Juvenile Storage Nonfiction",
+    "genres": "nonfiction",
+    "audience": "juvenile",
+    "shelf_location_id": "4060"
+  },
+  {
+    "name": "Juvenile Toy Reading Rover",
+    "genres": "",
+    "audience": "juvenile",
+    "shelf_location_id": "4231"
+  },
+  {
+    "name": "Juvenile Video",
+    "genres": "video",
+    "audience": "juvenile",
+    "shelf_location_id": "4062"
+  },
+  {
+    "name": "Juvenile Video Reading Rover",
+    "genres": "",
+    "audience": "juvenile",
+    "shelf_location_id": "4234"
+  },
+  {
+    "name": "Office",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4068"
+  },
+  {
+    "name": "Office Childrens",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4069"
+  },
+  {
+    "name": "On Order",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4320"
+  },
+  {
+    "name": "Pamphlets",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4256"
+  },
+  {
+    "name": "Professional Nonfiction Collection",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4070"
+  },
+  {
+    "name": "Stacks",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "1"
+  },
+  {
+    "name": "Storage",
+    "genres": "",
+    "audience": "",
+    "shelf_location_id": "4259"
+  },
+  {
+    "name": "Young Adult Audiobook",
+    "genres": "audiobook",
+    "audience": "young-adult",
+    "shelf_location_id": "4073"
+  },
+  {
+    "name": "Young Adult Biography",
+    "genres": "biography",
+    "audience": "young-adult",
+    "shelf_location_id": "4074"
+  },
+  {
+    "name": "Young Adult Fiction",
+    "genres": "fiction",
+    "audience": "young-adult",
+    "shelf_location_id": "4077"
+  },
+  {
+    "name": "Young Adult Fiction Battle of the Book",
+    "genres": "fiction",
+    "audience": "young-adult",
+    "shelf_location_id": "4078"
+  },
+  {
+    "name": "Young Adult Fiction Display",
+    "genres": "fiction",
+    "audience": "young-adult",
+    "shelf_location_id": "4079"
+  },
+  {
+    "name": "Young Adult Fiction Paperback",
+    "genres": "fiction",
+    "audience": "young-adult",
+    "shelf_location_id": "4080"
+  },
+  {
+    "name": "Young Adult Foreign Language Fiction",
+    "genres": "foreign-language,fiction",
+    "audience": "young-adult",
+    "shelf_location_id": "4082"
+  },
+  {
+    "name": "Young Adult Graphic Novel",
+    "genres": "graphic-novel",
+    "audience": "young-adult",
+    "shelf_location_id": "4086"
+  },
+  {
+    "name": "Young Adult Kit",
+    "genres": "",
+    "audience": "young-adult",
+    "shelf_location_id": "4087"
+  },
+  {
+    "name": "Young Adult Magazine",
+    "genres": "magazines-periodicals",
+    "audience": "young-adult",
+    "shelf_location_id": "4089"
+  },
+  {
+    "name": "Young Adult Music",
+    "genres": "music",
+    "audience": "young-adult",
+    "shelf_location_id": "4090"
+  },
+  {
+    "name": "Young Adult New Fiction",
+    "genres": "fiction",
+    "audience": "young-adult",
+    "shelf_location_id": "4091"
+  },
+  {
+    "name": "Young Adult New Nonfiction",
+    "genres": "nonfiction",
+    "audience": "young-adult",
+    "shelf_location_id": "4093"
+  },
+  {
+    "name": "Young Adult Nonfiction",
+    "genres": "nonfiction",
+    "audience": "young-adult",
+    "shelf_location_id": "4094"
+  },
+  {
+    "name": "Young Adult Nonfiction Battle of the Book",
+    "genres": "nonfiction",
+    "audience": "young-adult",
+    "shelf_location_id": "4095"
+  },
+  {
+    "name": "Young Adult Nonfiction Display",
+    "genres": "nonfiction",
+    "audience": "young-adult",
+    "shelf_location_id": "4311"
+  },
+  {
+    "name": "Young Adult Reference",
+    "genres": "nonfiction",
+    "audience": "young-adult",
+    "shelf_location_id": "4100"
+  },
+  {
+    "name": "Young Adult Storage Nonfiction",
+    "genres": "nonfiction",
+    "audience": "young-adult",
+    "shelf_location_id": "4102"
+  },
+  {
+    "name": "Young Adult Video",
+    "genres": "video",
+    "audience": "young-adult",
+    "shelf_location_id": "4103"
+  }
+]

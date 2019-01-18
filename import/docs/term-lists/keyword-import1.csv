@@ -1,0 +1,7 @@
+Name,Description
+Marc Terms,marc authority keywords for audience and genre
+Dewey Key,"keyword values from the identifier field with authority ""ddc"""
+Form,keyword values from the form field
+Other,Keywords for genre or audience that may be used from authorities/lists other than marc
+Topic Keyword,keywords from topics / keywords field that may be used to identify genre or audience
+Type,item type keywords

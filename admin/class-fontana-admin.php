@@ -363,7 +363,7 @@ class Fontana_Admin {
             'show_in_rest'               => true,
             'rest_base'                  => 'locations',
         );
-        register_taxonomy( 'location', array( 'post', 'page', 'actions', 'resources', 'tribe_events'), $args );
+        register_taxonomy( 'location', array( 'post', 'page', 'actions', 'resources', 'tribe_events', 'collection-item'), $args );
 
     }
 
@@ -402,7 +402,7 @@ class Fontana_Admin {
             'show_in_rest'               => true,
             'rest_base'                  => 'services',
         );
-        register_taxonomy( 'services', array( 'post', 'page', 'actions', 'resources', 'tribe_events'), $args );
+        register_taxonomy( 'services', array( 'post', 'page', 'actions', 'resources', 'tribe_events', 'collection-item'), $args );
     }
 
     public function registerSubjectsTaxonomy()
@@ -574,5 +574,139 @@ class Fontana_Admin {
         );
         register_post_type( 'collection-item', $args );
 
+    }
+
+    /**
+     * Registers topics taxonomy for collection items. 
+     * 
+     * Allows for further tagging of collection items with subjects/topics, language,
+     * reading level etc. Contains parent categories to organize keywords. 
+     */
+    public function registerTopicsTaxonomy() {
+        $labels = array(
+            'name'                       => _x( 'Topics', 'Taxonomy General Name', 'fontana' ),
+            'singular_name'              => _x( 'Topic', 'Taxonomy Singular Name', 'fontana' ),
+            'menu_name'                  => __( 'Topics', 'fontana' ),
+            'all_items'                  => __( 'All Topics', 'fontana' ),
+            'parent_item'                => __( 'Parent Topic', 'fontana' ),
+            'parent_item_colon'          => __( 'Parent Topic:', 'fontana' ),
+            'new_item_name'              => __( 'New Topic Name', 'fontana' ),
+            'add_new_item'               => __( 'Add New Topic', 'fontana' ),
+            'edit_item'                  => __( 'Edit Topic', 'fontana' ),
+            'update_item'                => __( 'Update Topic', 'fontana' ),
+            'view_item'                  => __( 'View Topic', 'fontana' ),
+            'separate_items_with_commas' => __( 'Separate Topics with commas', 'fontana' ),
+            'add_or_remove_items'        => __( 'Add or remove Topics', 'fontana' ),
+            'choose_from_most_used'      => __( 'Choose from the most used', 'fontana' ),
+            'popular_items'              => __( 'Popular Topics', 'fontana' ),
+            'search_items'               => __( 'Search Topics', 'fontana' ),
+            'not_found'                  => __( 'Not Found', 'fontana' ),
+            'no_terms'                   => __( 'No Topics', 'fontana' ),
+            'items_list'                 => __( 'Topics list', 'fontana' ),
+            'items_list_navigation'      => __( 'Topics list navigation', 'fontana' ),
+        );
+        $args = array(
+            'labels'                     => $labels,
+            'hierarchical'               => true,
+            'public'                     => true,
+            'show_ui'                    => true,
+            'show_admin_column'          => false,
+            'show_in_nav_menus'          => true,
+            'show_tagcloud'              => true,
+            'show_in_rest'               => true,
+            'rest_base'                  => 'topics',
+        );
+        
+        register_taxonomy( 'topics', array( 'collection-item' ), $args );
+    }
+    /**
+     * Register shelf Location taxonomy for collection-item.
+     * 
+     * This taxonomy is used to store information about evergreen shelf locations, and match  
+     * items to a corresponding audience/genre. ACF fields include Shelf Location ID, related
+     * genre and audience terms.
+     */
+    public function registerShelfLocationTaxonomy() {
+      $labels = array(
+          'name'                       => _x( 'Shelving Locations', 'Taxonomy General Name', 'fontana' ),
+          'singular_name'              => _x( 'Shelving Location', 'Taxonomy Singular Name', 'fontana' ),
+          'menu_name'                  => __( 'Shelving Locations', 'fontana' ),
+          'all_items'                  => __( 'All Shelving Locations', 'fontana' ),
+          'parent_item'                => __( 'Parent Shelving Location', 'fontana' ),
+          'parent_item_colon'          => __( 'Parent Shelving Location:', 'fontana' ),
+          'new_item_name'              => __( 'New Shelving Location Name', 'fontana' ),
+          'add_new_item'               => __( 'Add New Shelving Location', 'fontana' ),
+          'edit_item'                  => __( 'Edit Shelving Location', 'fontana' ),
+          'update_item'                => __( 'Update Shelving Location', 'fontana' ),
+          'view_item'                  => __( 'View Shelving Location', 'fontana' ),
+          'separate_items_with_commas' => __( 'Separate Shelving Locations with commas', 'fontana' ),
+          'add_or_remove_items'        => __( 'Add or remove Shelving Locations', 'fontana' ),
+          'choose_from_most_used'      => __( 'Choose from the most used', 'fontana' ),
+          'popular_items'              => __( 'Popular Shelving Locations', 'fontana' ),
+          'search_items'               => __( 'Search Shelving Locations', 'fontana' ),
+          'not_found'                  => __( 'Not Found', 'fontana' ),
+          'no_terms'                   => __( 'No Shelving Locations', 'fontana' ),
+          'items_list'                 => __( 'Shelving Locations list', 'fontana' ),
+          'items_list_navigation'      => __( 'Shelving Locations list navigation', 'fontana' ),
+      );
+      $args = array(
+          'labels'                     => $labels,
+          'hierarchical'               => false,
+          'public'                     => true,
+          'show_ui'                    => true,
+          'show_admin_column'          => false,
+          'show_in_nav_menus'          => true,
+          'show_tagcloud'              => false,
+          'show_in_rest'               => false,
+          'rest_base'                  => 'shelves',
+      );
+      register_taxonomy( 'shelf', array( 'collection-item' ), $args );
+    }
+    /**
+     * Registers Keyword taxonomy for collection-items.
+     * 
+     * This taxonomy is used to associate common keywords with a related genre or audience
+     * for collection categorization/tagging. There are parent terms within this taxonomy
+     * used to categorize the keywords. Keywords should be children of one of those terms
+     * to be used in collection item processing. (i.e. "Marc Terms" - controlled cataloging 
+     * vocab, "Other" - other keywords for matching genre/audience keywords, "Dewey Key" - 
+     * for matching non-numeric Dewey values, "Topic Keyword" - for matching topic keywords
+     * that may correspond to related genres/audience, Form, Type). ACF fields include related
+     * genre and audience terms.
+     */
+    public function registerKeywordTaxonomy() {
+      $labels = array(
+          'name'                       => _x( 'Keywords', 'Taxonomy General Name', 'fontana' ),
+          'singular_name'              => _x( 'Keyword', 'Taxonomy Singular Name', 'fontana' ),
+          'menu_name'                  => __( 'Keywords', 'fontana' ),
+          'all_items'                  => __( 'All Keywords', 'fontana' ),
+          'parent_item'                => __( 'Parent Authority', 'fontana' ),
+          'parent_item_colon'          => __( 'Parent Authority:', 'fontana' ),
+          'new_item_name'              => __( 'New Keyword', 'fontana' ),
+          'add_new_item'               => __( 'Add New Keyword', 'fontana' ),
+          'edit_item'                  => __( 'Edit Keyword', 'fontana' ),
+          'update_item'                => __( 'Update Keyword', 'fontana' ),
+          'view_item'                  => __( 'View Keyword', 'fontana' ),
+          'separate_items_with_commas' => __( 'Separate Keywords with commas', 'fontana' ),
+          'add_or_remove_items'        => __( 'Add or remove Keywords', 'fontana' ),
+          'choose_from_most_used'      => __( 'Choose from the most used', 'fontana' ),
+          'popular_items'              => __( 'Popular Keywords', 'fontana' ),
+          'search_items'               => __( 'Search Keywords', 'fontana' ),
+          'not_found'                  => __( 'Not Found', 'fontana' ),
+          'no_terms'                   => __( 'No Keywords', 'fontana' ),
+          'items_list'                 => __( 'Keywords list', 'fontana' ),
+          'items_list_navigation'      => __( 'Keywords list navigation', 'fontana' ),
+      );
+      $args = array(
+          'labels'                     => $labels,
+          'hierarchical'               => true,
+          'public'                     => true,
+          'show_ui'                    => true,
+          'show_admin_column'          => false,
+          'show_in_nav_menus'          => true,
+          'show_tagcloud'              => false,
+          'show_in_rest'               => false,
+      );
+      register_taxonomy( 'keyword', array( 'collection-item' ), $args );
     }
 }
