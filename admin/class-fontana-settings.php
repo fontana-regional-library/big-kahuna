@@ -402,9 +402,13 @@ class Fontana_Settings_Page {
  */
   function posts_custom_columns($column_name, $post_id){
     if($column_name === 'thumbnail'){
-      echo '<a href="' . get_edit_post_link() . '">';
-      echo the_post_thumbnail( 'thumbnail' );
-      echo '</a>';
+      if(has_post_thumbnail($post_id)){
+        echo '<a href="' . get_post_meta($post_id, 'url', true) . '" target="_blank">';
+        echo the_post_thumbnail( 'thumbnail' );
+        echo '</a>';
+      } else {
+        echo '<a href="' . get_post_meta($post_id, 'url', true) . '" target="_blank">record</a>';
+      }
     }
     if($column_name === 'verify'){
       $fail = get_post_meta($post_id, 'check_fail_count', true);
