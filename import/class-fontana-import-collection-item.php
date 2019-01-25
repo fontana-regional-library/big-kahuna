@@ -1063,11 +1063,17 @@ class Fontana_Import_Collection_Item {
       str_replace(" ", "-", $imageTitle);
       $image_name       = $imageTitle . ".jpg";
       $upload_dir       = wp_upload_dir();
-      $directory        = $upload_dir['basedir'] . "/collection";
-      $unique_file_name = wp_unique_filename( $directory, $image_name ); // Generate unique name
+      //$directory        = $upload_dir['basedir'] . "/collection";
+      //$unique_file_name = wp_unique_filename( $directory, $image_name ); // Generate unique name
+      $unique_file_name = wp_unique_filename( $upload_dir['path'], $image_name );
       $filename         = basename( $unique_file_name ); // Create image file name
-      $file = $directory . "/" . $filename;
-
+      
+      // Check folder permission and define file location
+    if( wp_mkdir_p( $upload_dir['path'] ) ) {
+      $file = $upload_dir['path'] . '/' . $filename;
+    } else {
+      $file = $upload_dir['basedir'] . '/' . $filename;
+    }
       // Create the image  file on the server
       file_put_contents( $file, $image_data );
 

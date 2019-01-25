@@ -194,7 +194,7 @@ class Fontana {
       $this->loader->add_action( 'bulk_actions-edit-collection-item', $plugin_settings, 'register_custom_bulk_actions' );
       $this->loader->add_action( 'admin_notices', $plugin_settings, 'bulk_check_admin_notice' );
       $this->loader->add_action( 'before_delete_post', $plugin_settings, 'delete_attachments' );
-      $this->loader->add_action( 'wp_handle_upload_prefilter', $plugin_settings, 'upload_directory' );
+      //$this->loader->add_action( 'wp_handle_upload_prefilter', $plugin_settings, 'upload_directory' );
       //$this->loader->add_action( 'created_term', $plugin_settings, 'collectionTermData', 10, 3 );
       $this->loader->add_action( 'admin_post_update_terms', $plugin_settings, 'collectionTermData' );
       $this->loader->add_action( 'fbk_update_collection_term_lists', $plugin_settings, 'collectionTermData' );
