@@ -198,6 +198,7 @@ class Fontana {
       //$this->loader->add_action( 'created_term', $plugin_settings, 'collectionTermData', 10, 3 );
       $this->loader->add_action( 'admin_post_update_terms', $plugin_settings, 'collectionTermData' );
       $this->loader->add_action( 'fbk_update_collection_term_lists', $plugin_settings, 'collectionTermData' );
+      $this->loader->add_action( 'admin_post_delete_results', $plugin_settings, 'delete_counter_results' );
     }
 
 	/**

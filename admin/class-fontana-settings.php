@@ -571,6 +571,22 @@ class Fontana_Settings_Page {
     }
   }
   /**
+   * Resets the offset / counter for the OverDrive Importer.
+   */
+  public function delete_counter_results(){
+    if (isset($_REQUEST['lib'])){
+      foreach($_REQUEST['lib'] as $key => $id){
+        $results = get_option('overdrive_results_count_'.$id);
+        $results['offset'] = 0;
+        update_option('overdrive_results_count_' . $id, $results);
+      }
+    }
+    if (current_action() == 'admin_post_delete_results'){
+      wp_redirect(admin_url('admin.php?page=fontana-settings'));
+      exit;
+    }
+  }
+  /**
    * Adds callback filter to customize the upload directory.
    * 
    * @see $this->customize_upload_directory();

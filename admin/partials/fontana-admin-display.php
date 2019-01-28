@@ -60,7 +60,7 @@ if ($check !== false){
                 }?>
                 <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
               <input type="hidden" name="action" value="update_terms">
-              <input class="alignright button button-secondary button-large" type="submit" value="Update Cached Terms List"> <em>
+              <input class="alignright button button-secondary button-large" type="submit" value="Update Cached Terms List">
               </form>
               <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
               <input type="hidden" name="action" value="check_failed">
@@ -121,6 +121,17 @@ if ($check !== false){
                 <input type="submit" class="button-primary" value="<?php _e('Save OverDrive Libraries') ?>" />
             </p>
             </form>
+            <?php if($this->overdriveLibraries && is_array($this->overdriveLibraries)){ ?>
+              <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
+              <h4> Delete Results Counter</h4>
+                <input type="hidden" name="action" value="delete_results">
+                <?php foreach($this->overdriveLibraries as $lib => $id){
+                  if(false !== ($results = get_option('overdrive_results_count_' . $id))){
+                    echo $lib . ' <input type="checkbox" name="lib[]" value="'.$id .'" /><br/>';
+                  }
+                }?>
+                <input type="submit" value="Delete Results">
+                      </form> <?php } ?>
 <hr>
 <?php settings_errors('fontana_api_settings'); ?>
 <h3>Developer Settings</h3>
