@@ -563,7 +563,7 @@ function overdrive_library_download( $libraryId, $limit = 200, $new = false ){
   $chunkIds = array_chunk($imported, 25);
   foreach($chunkIds as $key => $val){
     $metaRecords = $overDriveApi->getBulkMeta($libraryId, $val);
-    $metadata += $metaRecords['metadata'];
+    $metadata = array_merge($metadata, $metaRecords['metadata']);
   }
 
   //Merge records into a single record.
