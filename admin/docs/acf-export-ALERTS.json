@@ -1,0 +1,135 @@
+[
+    {
+        "key": "group_5c420808a7b25",
+        "title": "Alerts",
+        "fields": [
+            {
+                "key": "field_5c420c96d4d9f",
+                "label": "Short Title",
+                "name": "short_title",
+                "type": "text",
+                "instructions": "Short description (110 characters or less - you do not need to include the library name or location in this short description)",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": 110
+            },
+            {
+                "key": "field_5c42093198f29",
+                "label": "Start Notification",
+                "name": "start_notification",
+                "type": "date_time_picker",
+                "instructions": "Enter a date and time when the notice or alert should start being displayed.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "display_format": "F j, Y g:i a",
+                "return_format": "F j, Y g:i a",
+                "first_day": 1
+            },
+            {
+                "key": "field_5c42080c98f28",
+                "label": "Notice expiration",
+                "name": "notice_expiration",
+                "type": "date_time_picker",
+                "instructions": "Pick a date and time for when the notice should stop displaying.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "display_format": "F j, Y g:i a",
+                "return_format": "F j, Y g:i a",
+                "first_day": 1
+            },
+            {
+                "key": "field_5c420998dfb36",
+                "label": "Notice Type",
+                "name": "notice_type",
+                "type": "radio",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "planned": "Planned Closing or Holiday",
+                    "unscheduled": "Emergency or Unplanned Closing",
+                    "alert": "Service Alert"
+                },
+                "allow_null": 0,
+                "other_choice": 0,
+                "default_value": "",
+                "layout": "vertical",
+                "return_format": "value",
+                "save_other_choice": 0
+            },
+            {
+                "key": "field_5c420b0f5c564",
+                "label": "Affected Location",
+                "name": "affected_location",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "all-locations": "All Locations",
+                    "jackson-county-public-library": "Jackson County Public Library",
+                    "macon-county-public-library": "Macon County Public Library",
+                    "albert-carlton-cashiers-community-library": "Albert Carlton-Cashiers Community Library",
+                    "marianna-black-library": "Marianna Black Library",
+                    "nantahala-community-library": "Nantahala Community Library",
+                    "reading-rover": "Reading Rover",
+                    "headquarters": "Headquarters"
+                },
+                "allow_custom": 0,
+                "default_value": [
+                    "all-locations"
+                ],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value",
+                "save_custom": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "alert"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "acf_after_title",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "field",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": ""
+    }
+]
