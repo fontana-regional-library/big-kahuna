@@ -206,11 +206,11 @@ class Fontana {
       $this->loader->add_action( 'manage_alert_posts_custom_column', $plugin_dashboard,  'alert_custom_columns', 10, 2 );
       $this->loader->add_action( 'manage_collection-item_posts_custom_column', $plugin_dashboard,  'collection_item_custom_columns', 10, 2 );
       //Custom admin actions
+      $this->loader->add_action( 'acf/save_post', $plugin_dashboard, 'save_alert_data');
       $this->loader->add_action( 'bulk_actions-edit-collection-item', $plugin_dashboard, 'register_custom_bulk_actions' );
       $this->loader->add_action( 'admin_notices', $plugin_dashboard, 'bulk_check_admin_notice' );
       $this->loader->add_action( 'before_delete_post', $plugin_dashboard, 'delete_attachments' );
           //$this->loader->add_action( 'wp_handle_upload_prefilter', $plugin_dashboard, 'upload_directory' );
-
     }
 
 	/**

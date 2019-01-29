@@ -187,7 +187,41 @@ function alert_custom_columns($column_name, $post_id){
     }
   }
 
- 
+ /**
+   * Tags alert post types with appropriate location on save.
+   * 
+   * @param int   $post_id  The post ID      
+   */
+  function save_alert_data ( $post_id ) { 
+    // bail early if not alert
+    if(get_post_type($post_id) !== "alert"){
+      return;
+    }
+    $title = get_field('short_title');
+    
+    $locations = get_terms( array(
+      'taxonomy' => 'location',
+      'hide_empty' => false,
+      'fields' => 'slugs',
+    ));
+    
+    $affected = get_field('affected_location');
+
+    if(in_array('all-locations', $affected)){
+      wp_set_object_terms($post_id, $locations, 'location', false);
+      $title .= " - " . "All locations";
+    }
+    if(in_array('all-locations', $affected) && count($affected) > 1){
+      $set[] = 'all-locations';
+      update_field('affected_location', $set, $post_id);
+    }
+
+    if(!in_array('all-locations', $affected) && !empty($affected)){
+      wp_set_object_terms($post_id, $affected, 'location', false);
+    }
+    wp_update_post(array('ID'=>$post_id, 'post_title'=>$title));
+  }
+  
   /**
    * Add a new item into the Bulk Actions Dropdown.
    * 
