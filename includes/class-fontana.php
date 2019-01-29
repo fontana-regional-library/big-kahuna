@@ -195,6 +195,7 @@ class Fontana {
 
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-fontana-admin-views.php';
     $plugin_dashboard = new Fontana_Admin_Views();
+      $this->loader->add_action( 'init', $plugin_dashboard, 'fetch_locations', 99);
       //Customixe Taxonomy Edit/View
       $this->loader->add_action( 'manage_edit-keyword_columns', $plugin_dashboard, 'add_keyword_columns' );
       $this->loader->add_action( 'manage_edit-shelf_columns', $plugin_dashboard, 'add_shelf_columns' ); 

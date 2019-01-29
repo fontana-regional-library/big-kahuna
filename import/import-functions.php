@@ -13,7 +13,7 @@
  */
   function fbkGetPostIdByTitle($name, $post_type) {
     $post = get_page_by_title($name, OBJECT, $post_type);
-    return $tribePost->ID;	
+    return $post->ID;	
   }
 /**
  * Calculates the different between two times.
