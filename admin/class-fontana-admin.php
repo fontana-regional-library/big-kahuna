@@ -551,7 +551,7 @@ class Fontana_Admin {
           'show_in_rest'               => true,
           'rest_base'                  => 'locations',
       );
-      register_taxonomy( 'location', array( 'post', 'page', 'actions', 'resources', 'tribe_events', 'collection-item'), $args );
+      register_taxonomy( 'location', array( 'post', 'page', 'actions', 'resources', 'tribe_events', 'collection-item', 'alert'), $args );
 
   }
 
