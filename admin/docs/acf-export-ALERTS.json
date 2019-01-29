@@ -72,7 +72,8 @@
                 "choices": {
                     "planned": "Planned Closing or Holiday",
                     "unscheduled": "Emergency or Unplanned Closing",
-                    "alert": "Service Alert"
+                    "alert": "Service Alert",
+                    "announcement": "Announcement"
                 },
                 "allow_null": 0,
                 "other_choice": 0,
