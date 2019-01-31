@@ -9,41 +9,7 @@
  */
 
 class Fontana_Admin_Views {
-  /**
-	 * User Groups
-	 *
-	 * @access   private
-	 * @var      array    $user_groups  Array of grouped user positions and rows.
-	 */
-  private $user_groups = array(
-    'supervisors'     => array(
-      'Department Supervisor', 'Branch Librarian', 'Branch Supervisor', 'Asst. County Librarian'
-      ),
-    'managers'        => array(
-      'County Librarian', 'Finance Officer', 'IT Officer', 'Regional Director'
-      )
-    );
-
-  /**
-   * Default Post Query Arguments
-   * 
-   * @access  private
-   * @var     array   $post_args    array of default post query arguments.
-   */
-  private $post_args = array(
-    'numberposts' => -1,
-      'post_type'   => '',
-      'meta_query'  => array(
-      ),
-    );
-
-  /**
-   * Location Terms
-   * 
-   * @access  private
-   * @var   array   $locations  array of location taxonomy terms.
-   */
-  private $locations = array();
+  
 
 
   /**
@@ -53,12 +19,7 @@ class Fontana_Admin_Views {
     
   }
 
-  public function fetch_locations(){
-    $this->locations = get_terms( array(
-      'taxonomy' => 'location',
-      'hide_empty' => false,
-    ));
-  }
+  
  /**
    * Adds custom columns to Keyword Taxonomy admin display page.
    * 
@@ -175,18 +136,19 @@ function alert_custom_columns($column_name, $post_id){
     $now = date_create(null, timezone_open('America/New_York'));
     $diff = date_diff($now, $ex, FALSE);
     
-    $hours = $diff->format("%R%i");
-    $h = $diff->h;
-    $m = $diff->i;
+    $h = $diff->format("%R%h");
+    $m = $diff->format("%R%i"); 
 
-    if($column_name === 'start' && strtotime($expiration) > strtotime('now')){
+    if($column_name === 'start' && $m > 0){
       the_field('start_notification', $post_id);
     }
-    if( $column_name === 'expire' && $hours > 60*4 ){
+    if( $column_name === 'expire' && $h > 3 ){
       echo $expiration;
-    } elseif( $column_name === 'expire' && $hours > 0 ){
-      echo $h>1?$h . " hours " : $h>0 ? $h . " hour " : "";
-      echo $m>1 ?  $m . " minutes" : $m>0 ? $m . " minute" : "";
+    } elseif( $column_name === 'expire' && $m > 0 ){
+      echo "<span class='wp-ui-text-notification'>";
+      echo $h>=1 ? substr($h,1) . "h " : "";
+      echo $m>=1 ? substr($m,1) . "m" : "";
+      echo "</span>";
     } elseif( $column_name === 'expire' ){
       echo '<em>Expired</em>';
     }
@@ -232,30 +194,66 @@ function alert_custom_columns($column_name, $post_id){
    * @param int   $post_id  The post ID      
    */
   function save_alert_data ( $post_id ) { 
+    error_log("ACF");
     // bail early if not alert
-    if(get_post_type($post_id) !== "alert"){
+    if( get_post_type($post_id) !== "alert" ){
       return;
     }
-    $title = get_field('short_title');
     
-    $locations = wp_list_pluck($this->locations, 'slug');
-    
+    $title = get_the_title($post_id);
+    $short_title = get_field('short_title');
+      
     $affected = get_field('affected_location');
+    $count = count($affected);
 
+    $checkTitle = $short_title;
     if(in_array('all-locations', $affected)){
+      $checkTitle .= " - " . "All locations";
+      $locations = get_terms( array(
+        'taxonomy'    => 'location',
+        'hide_empty'  => false,
+        'fields'      => 'slugs'
+      ));
       wp_set_object_terms($post_id, $locations, 'location', false);
-      $title .= " - " . "All locations";
-    }
-    if(in_array('all-locations', $affected) && count($affected) > 1){
-      $set[] = 'all-locations';
-      update_field('affected_location', $set, $post_id);
+
+      if(count($affected) > 1){
+        $set[] = 'all-locations';
+        update_field('affected_location', $set, $post_id);
+      }
+    } else {
+      wp_set_object_terms($post_id, $affected, 'location', false);
+      
+      if($count > 1){
+        $checkTitle .= " - " . $count . " locations";
+      }
+      if($count === 1){
+       $checkTitle .= " - " . $count . " location";
+      }
     }
 
-    if(!in_array('all-locations', $affected) && !empty($affected)){
-      wp_set_object_terms($post_id, $affected, 'location', false);
+    $post = array(
+      'ID'          => $post_id,
+      'post_title'  => $checkTitle,
+    );
+
+    $name = get_post_field( 'post_name', $post_id);
+    $date = get_field('start_notification');
+
+    $checkName = sanitize_title(date('Y-m', strtotime($date)) . " " . $short_title);
+
+    if( empty($name) || $name !== $checkName ){
+      $post['post_name'] = $checkName;
+      wp_update_post($post);
+      return;
     }
-    wp_update_post(array('ID'=>$post_id, 'post_title'=>$title));
-  }
+
+    // bail if title doesn't need to update
+    if($checkTitle == $title){
+      return;
+    }
+
+    wp_update_post($post);
+  }  
 
   /**
    * Add a new item into the Bulk Actions Dropdown.
@@ -366,159 +364,5 @@ function alert_custom_columns($column_name, $post_id){
         $param['url']  = $param['baseurl'] . $mydir;
     }
     return $param;
-  }
-
-  /**
-   * Sends email to event coordinators if closing alert overlaps with events.
-   * 
-   * @param   int   $post_id    The post id of the saved alert.
-   */
-  public function alerts_notifications( $post_id ){
-    $this->locations = get_terms('location', array(
-      'hide_empty' => false,
-    ));
-    
-    error_log("ALERTS NOTIFICATIONS....");
-    // bail early if not alert
-    if(get_post_type($post_id) !== "alert"){
-      //error_log("bailing post_type");
-      return;
-    }
-    $meta = get_post_meta($post_id);
-    //error_log(print_r($meta, true));
-    if(!is_array($meta) || !array_key_exists('notice_type', $meta) || !array_key_exists('affected_location', $meta)){
-      //error_log("bailing no meta");
-      return;
-    }
-    if($meta['notice_type'][0] !== 'planned' && $meta['notice_type'][0] !== 'unplanned'){
-      //error_log("bailing not closed");
-      return;
-    }
-    $affected = maybe_unserialize($meta['affected_location'][0]);
-    //start_notification
-    $key = "closed - " . implode(",", $affected) . " - " . $meta['start_notification'][0] . " - " . $meta['notice_expiration'][0];
-    if(array_key_exists('email_tracker', $meta) && $meta['email_tracker'][0] === $key){
-      //error_log("bailing email sent");
-      return;
-    }
-    $supervisor_roles = array();
-    foreach($this->user_groups as $k => $group){
-      $supervisor_roles = array_merge($supervisor_roles, $group);
-    }
-    //error_log($meta['notice_expiration'][0]);
-    $location = 'all library locations';
-    $args = $this->post_args;
-    $args['post_type'] = 'tribe_events';
-    $args['meta_query'][] = array(
-      'key'     => '_EventStartDate',
-      'value'   => $meta['notice_expiration'][0],
-      'compare' =>  "<=",
-      'type'    => 'DATETIME',
-    );
-    $args['meta_query'][] = array(
-      'key'     => '_EventEndDate',
-      'value'   => $meta['start_notification'][0],
-      'compare' => ">=",
-      'type'    => 'DATETIME',
-    );
-    
-
-    $user_args = array(
-      'order' => 'ASC',
-      'orderby' => 'display_name',
-      'meta_query' => array(
-        'relation' => 'AND',
-        // array(
-        //   'key'  => 'position',
-        //   'compare'   => 'EXISTS'
-        // ),
-        array(
-          'key'  => 'position',
-          'value' => $supervisor_roles,
-          'compare'   => 'IN'
-        ),
-    ));  
-
-
-    if(!in_array('all-locations', $affected)){      
-      $locs = array();
-      $user_locs = array();
-      
-      foreach($this->locations as $term){
-        if(in_array($term->slug, $affected)){
-          $locs[] = $term->name;
-          $user_locs[] = $term->term_id;
-        }
-      }
-      $location = join(' and ', array_filter(array_merge(array(join(', ', array_slice($locs, 0, -1))), array_slice($locs, -1)), 'strlen'));
-      //error_log("Location : " . $location);
-
-      $args['tax_query'] = array(
-        array(
-          'taxonomy'=> 'location',
-          'field'   => 'slug',
-          'terms'   => $affected,
-        ),
-      );
-      $user_args['meta_query'][] = array(
-        'key' => 'location', 
-        'value' => $user_locs,
-        'compare'   => 'IN',
-      );
-    }
-    
-    
-    //The following events are scheduled during this alert / closing:
-    $events = get_posts($args);
-    //error_log("EVENTS are : " . print_r($events, true));
-
-    if(!empty($events)){
-      $subject = 'New Closing Scheduled';
-      //The following users should be notified
-      $email_to = array();
-      $list = "<ul>";
-
-      $user_query = new WP_User_Query( $user_args );
-      $notify = $user_query->get_results();
-      //error_log("NOTIFY : " . print_r($notify, true));
-
-      if(!empty($notify)){
-        foreach($notify as $user){
-          if(!in_array($user->user_email, $email_to)){
-            $email_to[] = $user->user_email;
-          }
-        }
-      }
-      //error_log("EMAIL TO : " . print_r($email_to, true));
-
-      foreach($events as $event){
-        $author = get_userdata($event->post_author);
-
-        if(!in_array($author->user_email, $email_to)){
-          $email_to[] = $author->user_email;
-        }
-
-        $list .= "<li><a href='https://fontanalib.org/events/" . $event->post_name . "'>" . $event->post_title . "</a> - " . tribe_get_venue ($event->ID ) ."</li>";
-      }
-      //error_log("EMAIL TO : " . print_r($email_to, true));
-     // error_log("LIST: " . print_r($list, true));
-
-      $list .= "</ul>";
-      ob_start();
-      include_once plugin_dir_path( __FILE__ ). "partials/email-header.php";
-      ?>
-      <p>This notice is to alert you that a library closing has been posted for <?php echo $location ?>. 
-      The following events are also scheduled during this closing:</p>
-      <p>
-          <?php echo $list ?>
-      </p>
-      <?php
-      include_once plugin_dir_path( __FILE__ ). "partials/email-footer.php";
-      $message = ob_get_contents();
-      ob_end_clean();
-      //error_log("EMAIL TO : " . print_r($email_to, true));
-      wp_mail('awest@fontanalib.org', $subject, $message);
-      update_post_meta($post_id, 'email_tracker', $key);
-    }
   }
 }
