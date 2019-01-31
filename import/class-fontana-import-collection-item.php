@@ -203,6 +203,7 @@ class Fontana_Import_Collection_Item {
    * POST IMPORT UTILITY FUNCTIONS
    */
   public function start_processing(){
+    error_log("class-fontana-import-collection-item - start_processing - SET TERMS : " . print_r($this->set_terms, true));
     if( $this->is_update === false || (($this->is_update === 'failed' || $this->is_update === 'check') && in_array(false, $this->report)) ){
       $info = $this->get_external_info();
 
