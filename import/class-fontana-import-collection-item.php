@@ -641,7 +641,11 @@ class Fontana_Import_Collection_Item {
           $theTerm = wp_insert_term($t, $tax, array('parent' => $parentId) );
         }
 
-        if(!is_wp_error($theTerm) || !empty($theTerm)){
+        if(is_wp_error($theTerm) && isset($theTerm->error_data->term_exists)){
+          $theTerm['term_id'] = (int) $theTerm->error_data->term_exists;
+        }
+
+        if(!is_wp_error($theTerm) && !empty($theTerm)){
           $term_ids[] = (int) $theTerm['term_id'];
         }
       }
