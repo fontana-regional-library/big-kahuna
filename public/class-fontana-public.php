@@ -235,5 +235,11 @@ class Fontana_Public {
 
 		$args['meta_query'] = $meta_query; 
 		return $args;
-	}
+  }
+  /**
+   * Removes the "continue reading" links from post excerpts.
+   */
+  function remove_read_more($more){
+    return;
+  }
 }

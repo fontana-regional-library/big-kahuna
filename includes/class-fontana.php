@@ -218,6 +218,7 @@ class Fontana {
 		$this->loader->add_action( 'rest_api_init', $plugin_public, 'register_images_field' );
     $this->loader->add_filter( 'tribe_rest_event_data', $plugin_public, 'add_tribe_event_data', 10, 2 );
     $this->loader->add_filter( 'rest_collection-item_query',$plugin_public, 'collection_api_newest',10, 2 );
+    $this->loader->add_filter( 'excerpt_more',$plugin_public, 'remove_read_more', 11);
 		
 		// Register hooks related to custom events api
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-fontana-events-api.php';
