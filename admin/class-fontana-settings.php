@@ -425,6 +425,14 @@ class Fontana_Settings_Page {
           $message .= "<li>".$item."</li>";
         }
         $message .= "</ol>";
+        $gr = get_field('goodreads_id', $post_id);
+        $imdb = get_field('imdb_id', $post_id);
+        if(!empty($gr)){
+          $message .= '<br><a href="http://goodreads.com/book/show/' . $gr . '" target="_blank">GoodReads</a>';
+        }
+        if(!empty($imdb)){
+          $message .= '<br><a href="https://www.imdb.com/title/' . $imdb . '" target="_blank">IMDB</a>';
+        }
       }
       echo $message;
     }
