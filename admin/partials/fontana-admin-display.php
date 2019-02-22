@@ -11,7 +11,7 @@
  * @package    Fontana
  * @subpackage Fontana/admin/partials
  */
-$importList = implode(", ", $this->collectionImporters);
+$importList = is_array($this->collectionImporters) ? implode(", ", $this->collectionImporters) : "";
 if(empty($this->apiSettings)){
   $this->apiSettings = array(
     'overdrive'=>'',
