@@ -296,6 +296,7 @@ class Fontana_Settings_Page {
     $this->overdriveSettings = $valid;
     update_option('fontana_overdrive_settings', $valid);
   }
+
   /**
    * Adds custom columns to Shelf Taxonomy admin display page.
    * 
@@ -593,36 +594,6 @@ class Fontana_Settings_Page {
       wp_redirect(admin_url('admin.php?page=fontana-settings'));
       exit;
     }
-  }
-  /**
-   * Adds callback filter to customize the upload directory.
-   * 
-   * @see $this->customize_upload_directory();
-   * 
-   * @param   array   $file   An array of data for a single file.
-   * 
-   * @return  array   A modified array of data for a single file. 
-   */
-  function upload_directory( $file ) {
-    add_filter( 'upload_dir', array($this, 'customize_upload_directory') );
-    return $file;
-}
-  /**
-   * Customizes the upload directory for custom post type media attachments.
-   * 
-   * @param   array   $param    parameter array
-   * 
-   * @return  array   returns modified parameter array
-   */
-  function customize_upload_directory( $param ) {
-      $id = $_REQUEST['post_id'];
-      $parent = get_post( $id )->post_parent;
-      if( "collection-item" == get_post_type( $id ) || "collection-item" == get_post_type( $parent ) ) {
-          $mydir         = '/collection';
-          $param['path'] = $param['basedir'] . $mydir;
-          $param['url']  = $param['baseurl'] . $mydir;
-      }
-      return $param;
   }
 }
    

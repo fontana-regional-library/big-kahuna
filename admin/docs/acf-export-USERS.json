@@ -1,0 +1,89 @@
+[
+    {
+        "key": "group_5c471d894002b",
+        "title": "User Profiles",
+        "fields": [
+            {
+                "key": "field_5c471d9f396d0",
+                "label": "Location",
+                "name": "location",
+                "type": "taxonomy",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "taxonomy": "location",
+                "field_type": "radio",
+                "allow_null": 0,
+                "add_term": 0,
+                "save_terms": 1,
+                "load_terms": 0,
+                "return_format": "id",
+                "multiple": 0
+            },
+            {
+                "key": "field_5c471de0396d1",
+                "label": "Role\/Position",
+                "name": "position",
+                "type": "select",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "Library Asst. I": "Library Asst. I",
+                    "Library Asst. II": "Library Asst. II",
+                    "Department Supervisor": "Department Supervisor",
+                    "Branch Supervisor": "Branch Supervisor",
+                    "Branch Librarian": "Branch Librarian",
+                    "Asst. County Librarian": "Asst. County Librarian",
+                    "County Librarian": "County Librarian",
+                    "Administrative Assistant": "Administrative Assistant",
+                    "Office Manager": "Office Manager",
+                    "Cataloger": "Cataloger",
+                    "Digital Content Coordinator": "Digital Content Coordinator",
+                    "Finance Officer": "Finance Officer",
+                    "Finance Specialist": "Finance Specialist",
+                    "IT Officer": "IT Officer",
+                    "IT Specialist": "IT Specialist",
+                    "IT Technician": "IT Technician",
+                    "Outreach Specialist": "Outreach Specialist",
+                    "Regional Director": "Regional Director",
+                    "Training Coordinator": "Training Coordinator"
+                },
+                "default_value": [],
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "return_format": "label",
+                "ajax": 0,
+                "placeholder": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "user_form",
+                    "operator": "==",
+                    "value": "all"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": ""
+    }
+]

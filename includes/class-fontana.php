@@ -162,43 +162,64 @@ class Fontana {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-      $this->loader->add_action( 'init', $plugin_admin, 'registerAudienceTaxonomy' );
-      $this->loader->add_action( 'init', $plugin_admin, 'registerGenreTaxonomy' );
+      //Register Custom Post Types
       $this->loader->add_action( 'init', $plugin_admin, 'registerCallToActionType' );
+      $this->loader->add_action( 'init', $plugin_admin, 'registerAlertStatusType' );
       $this->loader->add_action( 'init', $plugin_admin, 'registerCollectionItemType' );
-      $this->loader->add_action( 'init', $plugin_admin, 'registerFeaturedCollectionTaxonomy' );
       $this->loader->add_action( 'init', $plugin_admin, 'registerResourceType' );
+      //Register Custom Taxonnomies
+      $this->loader->add_action( 'init', $plugin_admin, 'registerAudienceTaxonomy' );
+      $this->loader->add_action( 'init', $plugin_admin, 'registerFeaturedCollectionTaxonomy' );
+      $this->loader->add_action( 'init', $plugin_admin, 'registerGenreTaxonomy' );
+      $this->loader->add_action( 'init', $plugin_admin, 'registerKeywordTaxonomy' );
       $this->loader->add_action( 'init', $plugin_admin, 'registerLocationTaxonomy' );
       $this->loader->add_action( 'init', $plugin_admin, 'registerResourceTypeTaxonomy' );
       $this->loader->add_action( 'init', $plugin_admin, 'registerServicesTaxonomy' );
-      $this->loader->add_action( 'init', $plugin_admin, 'registerSubjectsTaxonomy' );
-      $this->loader->add_action( 'init', $plugin_admin, 'registerVendorsTaxonomy' );
-      $this->loader->add_action( 'init', $plugin_admin, 'registerTopicsTaxonomy' );
       $this->loader->add_action( 'init', $plugin_admin, 'registerShelfLocationTaxonomy' );
-      $this->loader->add_action( 'init', $plugin_admin, 'registerKeywordTaxonomy' );
+      $this->loader->add_action( 'init', $plugin_admin, 'registerSubjectsTaxonomy' );
+      $this->loader->add_action( 'init', $plugin_admin, 'registerTopicsTaxonomy' );
+      $this->loader->add_action( 'init', $plugin_admin, 'registerVendorsTaxonomy' );
         
 
-				// Register hooks related to custom settings page
+		// Register hooks related to custom settings page
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-fontana-settings.php';
 		$plugin_settings = new Fontana_Settings_Page($this->get_plugin_name(), $this->get_version() );
 			$this->loader->add_action( 'admin_menu', $plugin_settings, 'create_settings' );
       $this->loader->add_action( 'admin_init', $plugin_settings, 'register_settings' );
-      $this->loader->add_filter( 'manage_collection-item_posts_columns', $plugin_settings, 'posts_columns' );
-      $this->loader->add_action( 'manage_collection-item_posts_custom_column', $plugin_settings,  'posts_custom_columns', 10, 2 );
-      $this->loader->add_action( 'manage_edit-shelf_columns', $plugin_settings, 'add_shelf_columns' );
-      $this->loader->add_action( 'manage_shelf_custom_column', $plugin_settings, 'add_shelf_column_content', 10 , 3 );
-      $this->loader->add_action( 'manage_edit-keyword_columns', $plugin_settings, 'add_keyword_columns' );
-      $this->loader->add_action( 'manage_keyword_custom_column', $plugin_settings, 'add_shelf_column_content', 10 , 3 );
-      $this->loader->add_filter( 'add_option_fontana_overdrive_libraries',$plugin_settings, 'update_overdrive_settings', 10, 2 );
-      $this->loader->add_filter( 'update_option_fontana_overdrive_libraries',$plugin_settings, 'update_overdrive_settings', 10, 2 );
-      $this->loader->add_action( 'bulk_actions-edit-collection-item', $plugin_settings, 'register_custom_bulk_actions' );
-      $this->loader->add_action( 'admin_notices', $plugin_settings, 'bulk_check_admin_notice' );
-      $this->loader->add_action( 'before_delete_post', $plugin_settings, 'delete_attachments' );
-      //$this->loader->add_action( 'wp_handle_upload_prefilter', $plugin_settings, 'upload_directory' );
-      //$this->loader->add_action( 'created_term', $plugin_settings, 'collectionTermData', 10, 3 );
+      $this->loader->add_filter( 'add_option_fontana_overdrive_libraries', $plugin_settings, 'update_overdrive_settings', 10, 2 );
+      $this->loader->add_filter( 'update_option_fontana_overdrive_libraries', $plugin_settings, 'update_overdrive_settings', 10, 2 );
       $this->loader->add_action( 'admin_post_update_terms', $plugin_settings, 'collectionTermData' );
       $this->loader->add_action( 'fbk_update_collection_term_lists', $plugin_settings, 'collectionTermData' );
+          //$this->loader->add_action( 'created_term', $plugin_settings, 'collectionTermData', 10, 3 );
       $this->loader->add_action( 'admin_post_delete_results', $plugin_settings, 'delete_counter_results' );
+
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-fontana-admin-views.php';
+    $plugin_dashboard = new Fontana_Admin_Views();
+      //Customixe Taxonomy Edit/View
+      $this->loader->add_action( 'manage_edit-keyword_columns', $plugin_dashboard, 'add_keyword_columns' );
+      $this->loader->add_action( 'manage_edit-shelf_columns', $plugin_dashboard, 'add_shelf_columns' ); 
+      $this->loader->add_action( 'manage_keyword_custom_column', $plugin_dashboard, 'add_shelf_column_content', 10, 3 );
+      $this->loader->add_action( 'manage_shelf_custom_column', $plugin_dashboard, 'add_shelf_column_content', 10, 3 );
+      //Customize Post Content Edit/View
+      $this->loader->add_filter( 'manage_alert_posts_columns', $plugin_dashboard, 'alert_columns' );
+      $this->loader->add_filter( 'manage_collection-item_posts_columns', $plugin_dashboard, 'collection_item_columns' );
+      $this->loader->add_action( 'manage_alert_posts_custom_column', $plugin_dashboard,  'alert_custom_columns', 10, 2 );
+      $this->loader->add_action( 'manage_collection-item_posts_custom_column', $plugin_dashboard,  'collection_item_custom_columns', 10, 2 );
+      //Custom admin actions
+      $this->loader->add_action( 'acf/save_post', $plugin_dashboard, 'save_alert_data');
+      $this->loader->add_action( 'bulk_actions-edit-collection-item', $plugin_dashboard, 'register_custom_bulk_actions' );
+      $this->loader->add_action( 'admin_notices', $plugin_dashboard, 'bulk_check_admin_notice' );
+      $this->loader->add_action( 'before_delete_post', $plugin_dashboard, 'delete_attachments' );
+      
+          //$this->loader->add_action( 'wp_handle_upload_prefilter', $plugin_dashboard, 'upload_directory' );
+
+      require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-fontana-notifications.php';
+      $plugin_notices = new Fontana_Notifications();
+      $this->loader->add_action( 'init', $plugin_notices, 'fetch_locations', 99);
+      $this->loader->add_filter( 'wp_mail_content_type', $plugin_notices, 'html_mail_content_type' );
+      //$this->loader->add_filter( 'wp_mail_from_name', $plugin_notices, 'set_mail_from_name' );
+      //$this->loader->add_filter( 'wp_mail_from', $plugin_notices, 'set_mail_from' );
+      $this->loader->add_action( 'save_post_alert', $plugin_notices, 'alert_notifications', 10, 3);
     }
 
 	/**
@@ -217,15 +238,16 @@ class Fontana {
 		$this->loader->add_action( 'rest_api_init', $plugin_public, 'registerMenusWithApi' );
 		$this->loader->add_action( 'rest_api_init', $plugin_public, 'register_images_field' );
     $this->loader->add_filter( 'tribe_rest_event_data', $plugin_public, 'add_tribe_event_data', 10, 2 );
-    $this->loader->add_filter( 'rest_collection-item_query',$plugin_public, 'collection_api_newest',10, 2 );
+    $this->loader->add_filter( 'rest_collection-item_query', $plugin_public, 'collection_api_newest', 10, 2 );
+    $this->loader->add_filter( 'rest_alert_query', $plugin_public, 'alert_api', 10, 2 );
 		
 		// Register hooks related to custom events api
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-fontana-events-api.php';
 		$events_api = new Fontana_Events_API($this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'rest_api_init', $events_api, 'register_api_fields' );
-		$this->loader->add_filter( 'register_post_type_args',$events_api, 'events_api', 10, 2 );
-		$this->loader->add_filter( 'rest_tribe_events_query',$events_api, 'events_api_upcoming',10, 2 );
-		$this->loader->add_filter( 'rest_prepare_tribe_events',$events_api, 'events_api_response', 10, 3 );
+		$this->loader->add_filter( 'register_post_type_args', $events_api, 'events_api', 10, 2 );
+		$this->loader->add_filter( 'rest_tribe_events_query', $events_api, 'events_api_upcoming',10, 2 );
+		$this->loader->add_filter( 'rest_prepare_tribe_events', $events_api, 'events_api_response', 10, 3 );
   }
   
   /**
