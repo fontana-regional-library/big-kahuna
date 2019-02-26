@@ -243,7 +243,7 @@ class Fontana_Public {
   function remove_read_more($more){
     return;
   }
-
+  /*
 	 * 
 	 * Filter Alerts api.
 	 * 
