@@ -237,9 +237,50 @@ class Fontana_Public {
 		return $args;
   }
   /**
+
    * Removes the "continue reading" links from post excerpts.
    */
   function remove_read_more($more){
     return;
   }
+
+	 * 
+	 * Filter Alerts api.
+	 * 
+	 * https://developer.wordpress.org/reference/hooks/rest_this-post_type_query/
+	 * 
+	 */
+	function alert_api($args, $request) {
+    $meta_query = array();
+    $today = date("Y-m-d H:i:s");
+
+    $alertExpiredQuery = array(
+			'key'	=>	'notice_expiration',
+			'value' => $today,
+      'compare' => '>=',
+      'type'  => 'DATETIME'
+		);
+
+    $meta_query[] = $alertExpiredQuery;
+    
+		
+		$args['orderby'] = array('notice_expiration' => 'ASC',);
+
+    if($request['alerts']) {
+      $meta_query[] = array(
+        'key'	=>	'start_notification',
+        'value' => $today,
+        'compare' => '<='
+      );
+
+      $meta_query[] = array(
+          'key'	=>	'notice_type',
+          'value' => 'announcement',
+          'compare' => '!='
+      );
+		}
+		$args['meta_query'] = $meta_query; 
+		return $args;
+	}
+
 }

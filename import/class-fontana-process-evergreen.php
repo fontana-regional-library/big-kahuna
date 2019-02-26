@@ -182,7 +182,7 @@ class Fontana_Process_Evergreen extends Fontana_Import_Collection_Item {
 
       $shelfGenre = array();
       if(is_array($shelfMeta) && array_key_exists('related_genres', $shelfMeta)){
-        $terms = maybe_unserialize($shelfMeta['related_genres']);
+        $terms = maybe_unserialize($shelfMeta['related_genres'][0]);
         if(is_array($terms) && !empty($terms)){
           $shelfGenre = $terms;
         }
@@ -190,7 +190,7 @@ class Fontana_Process_Evergreen extends Fontana_Import_Collection_Item {
 
       $shelfAudience = array();
       if(is_array($shelfMeta) && array_key_exists('related_audience', $shelfMeta)){
-        $terms = maybe_unserialize($shelfMeta['related_audience']);
+        $terms = maybe_unserialize($shelfMeta['related_audience'][0]);
         if(is_array($terms) && !empty($terms)){
           $shelfAudience = $terms;
         }
