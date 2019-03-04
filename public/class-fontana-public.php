@@ -102,12 +102,12 @@ class Fontana_Public {
 
 	public function registerMenusWithApi()
     {
-        register_rest_route('menus/v1', '/menus', array(
+        register_rest_route($this->plugin_name . '/v1', '/menus', array(
             'methods' => 'GET',
             'callback' => [$this, 'getAllMenus']
         ));
 
-        register_rest_route( 'menus/v1', '/menus/(?P<id>[a-zA-Z0-9_-]+)', array(
+        register_rest_route( $this->plugin_name . '/v1', '/menus/(?P<id>[a-zA-Z0-9_-]+)', array(
             'methods' => 'GET',
             'callback' => [$this, 'getMenuByLocation'],
         ) );
@@ -231,6 +231,23 @@ class Fontana_Public {
         )
       );
 			$meta_query[]=$itemFormQuery;
+    }
+    if($request['new']) {
+			$itemDateQuery =
+          array(
+            'key'	=>	'record_creation_date',
+            'value' => '',
+            'compare' => '>=',
+            'type'  => 'DATE'
+          );
+          if($request['new'] === 'this-week'){
+            $itemDateQuery['value'] = date("y-m-d", strtotime('-7 days'));
+          }elseif($request['new'] === 'this-month'){
+            $itemDateQuery['value'] = date("y-m-d", strtotime('-30 days'));
+          }else{
+            $itemDateQuery['value'] = $request['new'];
+          }
+			$meta_query[]=$itemDateQuery;
 		}
 
 		$args['meta_query'] = $meta_query; 
