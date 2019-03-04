@@ -123,7 +123,8 @@ class Fontana_Events_API extends Fontana_Public {
 			//flatten out nested objects
 			$data->data['title'] = $data->data['title']['rendered'];
 			$data->data['content'] = $data->data['content']['rendered'];
-			$data->data['excerpt'] = $data->data['excerpt']['rendered'];
+      $data->data['excerpt'] = $data->data['excerpt']['rendered'];
+      $data->data['type'] = 'event';
 		
 			$imageId = get_post_meta( $post->ID, '_thumbnail_id', true );
 
@@ -144,10 +145,10 @@ class Fontana_Events_API extends Fontana_Public {
 			unset($data->data['modified_gmt']);
 			//unset($data->data['slug']);
 			unset($data->data['status']);
-			unset($data->data['type']);
+			//unset($data->data['type']);
 			unset($data->data['categories']);
 			unset($data->data['_links']);
-			unset($data->data['author']);
+			//unset($data->data['author']);
 			unset($data->data['featured_media']);
 			unset($data->data['comment_status']);
 			unset($data->data['ping_status']);
