@@ -427,7 +427,7 @@ class Fontana_Admin {
           'show_in_rest'               => true,
           'rest_base'                  => 'featured-collections',
       );
-      register_taxonomy( 'featured-collections', array( 'collection-item' ), $args );
+      register_taxonomy( 'featured-collections', array( 'collection-item', 'actions', 'resources', 'post', 'page', 'tribe_events'), $args );
   }
 
   public function registerGenreTaxonomy()
