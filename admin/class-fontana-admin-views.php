@@ -183,6 +183,14 @@ function alert_custom_columns($column_name, $post_id){
           $message .= "<li>".$item."</li>";
         }
         $message .= "</ol>";
+        $gr = get_post_meta($post_id, 'goodreads_id', true);
+        $imdb = get_post_meta($post_id, 'imdb_id', true);
+        if(!empty($gr)){
+          $message .= '<br><a href="http://goodreads.com/book/show/' . $gr . '" target="_blank">GoodReads</a>';
+        }
+        if(!empty($imdb)){
+          $message .= '<br><a href="https://www.imdb.com/title/' . $imdb . '" target="_blank">IMDB</a>';
+        }
       }
       echo $message;
     }
