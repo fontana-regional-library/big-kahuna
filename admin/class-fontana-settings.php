@@ -372,5 +372,30 @@ class Fontana_Settings_Page {
       exit;
     }
   }
+  /**
+   * Cleans up multiple images for collection items.
+   */
+  public function cleanup_collection_multiple_images(){
+    global $wpdb; 
+
+    $attachments = $wpdb->get_results("SELECT  p1.ID, p1.post_parent
+    FROM {$wpdb->prefix}posts p1 
+    LEFT JOIN {$wpdb->prefix}posts p2 
+    ON ( p1.post_parent = p2.ID AND p2.post_type = 'collection-item')
+    LEFT JOIN {$wpdb->prefix}postmeta pm ON (p2.ID = pm.post_id and pm.meta_key='_thumbnail_id')
+    WHERE p1.post_type =  'attachment' AND p1.ID != pm.meta_value");
+
+    error_log(print_r($attachments, true));
+
+    foreach($attachments as $attachment){
+      wp_delete_post($attachment->ID);
+    }
+
+    if (current_action() == 'admin_post_delete_attachments'){
+      wp_redirect(admin_url('admin.php?page=fontana-settings'));
+      exit;
+    }
+
+  }
 }
    

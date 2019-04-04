@@ -59,6 +59,10 @@ if ($check !== false){
                 $scheduledEvergreen = '';
                 }?>
                 <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
+              <input type="hidden" name="action" value="delete_attachments">
+              <input class="alignright button button-secondary button-large" type="submit" value="Delete Extra Collection Images">
+              </form>
+                <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
               <input type="hidden" name="action" value="update_terms">
               <input class="alignright button button-secondary button-large" type="submit" value="Update Cached Terms List">
               </form>
