@@ -42,6 +42,12 @@ if ($check !== false){
               <p><?php _e('There are ' . $failed . ' failed items to process.', 'wordpress'); ?></p>
             </div>
             <?php } ?>
+            <?php 
+            if (false !== ($images = get_transient('collection_image_cleanup'))){?>
+            <div class="notice notice-large success">
+              <p><?php _e('Last check, there were ' . $images['deleted'] . ' extra collection images deleted. ' . $images['failed'] . ' failed.', 'wordpress'); ?></p>
+            </div>
+            <?php } ?>
             <hr>
             <h3>Collection Imports</h3>
             <?php $checkFailed = wp_next_scheduled('fbk_check_failed');
@@ -58,6 +64,10 @@ if ($check !== false){
               } else{
                 $scheduledEvergreen = '';
                 }?>
+                <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
+              <input type="hidden" name="action" value="delete_attachments">
+              <input class="alignright button button-secondary button-large" type="submit" value="Delete Extra Collection Images">
+              </form>
                 <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
               <input type="hidden" name="action" value="update_terms">
               <input class="alignright button button-secondary button-large" type="submit" value="Update Cached Terms List">

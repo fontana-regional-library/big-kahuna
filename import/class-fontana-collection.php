@@ -172,6 +172,7 @@ class Fontana_Collection {
         update_option('new_overdrive_results_count_' . $lib_id, $results, false);        
       }
     }
+    do_action('fbk_collection_image_cleanup');
   }
 /**
  * Checks for a list of items possibly removed from the OverDrive Catalogs.
