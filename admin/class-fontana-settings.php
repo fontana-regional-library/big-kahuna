@@ -374,6 +374,8 @@ class Fontana_Settings_Page {
   }
   /**
    * Cleans up multiple images for collection items.
+   * 
+   * Deletes extraneous media attachments from collection-item post type
    */
   public function cleanup_collection_multiple_images(){
     global $wpdb; 
@@ -385,12 +387,22 @@ class Fontana_Settings_Page {
     LEFT JOIN {$wpdb->prefix}postmeta pm ON (p2.ID = pm.post_id and pm.meta_key='_thumbnail_id')
     WHERE p1.post_type =  'attachment' AND p1.ID != pm.meta_value");
 
-    error_log(print_r($attachments, true));
-
-    foreach($attachments as $attachment){
-      wp_delete_post($attachment->ID);
+    if (current_action() == 'admin_post_delete_attachments'){
+      $attachments = array_slice($attachments, 0, 20);
     }
-
+    $count=array(
+      'failed'=>0,
+      'deleted'=>0
+    );
+    foreach($attachments as $attachment){
+      $success = wp_delete_post($attachment->ID);
+      if(!$success){
+        $count['failed']++;
+      }else{
+        $count['deleted']++;
+      }
+    }
+    set_transient('collection_image_cleanup', $count, 60*60*12);
     if (current_action() == 'admin_post_delete_attachments'){
       wp_redirect(admin_url('admin.php?page=fontana-settings'));
       exit;

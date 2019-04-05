@@ -42,6 +42,12 @@ if ($check !== false){
               <p><?php _e('There are ' . $failed . ' failed items to process.', 'wordpress'); ?></p>
             </div>
             <?php } ?>
+            <?php 
+            if (false !== ($images = get_transient('collection_image_cleanup'))){?>
+            <div class="notice notice-large success">
+              <p><?php _e('Last check, there were ' . $images['deleted'] . ' extra collection images deleted. ' . $images['failed'] . ' failed.', 'wordpress'); ?></p>
+            </div>
+            <?php } ?>
             <hr>
             <h3>Collection Imports</h3>
             <?php $checkFailed = wp_next_scheduled('fbk_check_failed');
