@@ -11,7 +11,7 @@
  * Plugin Name:       Fontana Regional Library
  * Plugin URI:        https://fontanalib.org
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.9.11
+ * Version:           1.9.12
  * Author:            Michael Schofield
  * Author URI:        https://schoeyfield.com
  * GitHub Plugin URI: https://github.com/fontana-regional-library/big-kahuna

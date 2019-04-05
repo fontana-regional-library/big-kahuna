@@ -72,6 +72,10 @@ class Fontana_Events_API extends Fontana_Public {
 	 * 
 	 */
 	function events_api_upcoming($args, $request) {
+    if($request['slug']){
+      $args['name'] = $request['slug'][0];
+      return $args;
+    }
 		$today = the_time('Y-m-d G:i:00');
 		$meta_query = array();
 		$eventStartQuery = array(
@@ -90,9 +94,8 @@ class Fontana_Events_API extends Fontana_Public {
 				'compare' => '>=',
 				'type' => 'DATE'
 				);
-		}
-
-		$meta_query[]=$eventStartQuery;
+    }
+    $meta_query[]=$eventStartQuery;
 
 		if($request['venue']) {
 			$eventVenueQuery = array(
@@ -240,7 +243,7 @@ class Fontana_Events_API extends Fontana_Public {
 		$id = get_the_ID();
 		$endDate = get_post_meta($id, '_EventEndDate', true);
 		return $endDate;
-	}	
+	}
 	
 	// Callback: Get Venue Data for tribe_events
 	function get_venue(){

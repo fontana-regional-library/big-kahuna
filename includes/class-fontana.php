@@ -192,6 +192,8 @@ class Fontana {
       $this->loader->add_action( 'fbk_update_collection_term_lists', $plugin_settings, 'collectionTermData' );
           //$this->loader->add_action( 'created_term', $plugin_settings, 'collectionTermData', 10, 3 );
       $this->loader->add_action( 'admin_post_delete_results', $plugin_settings, 'delete_counter_results' );
+      $this->loader->add_action( 'admin_post_delete_attachments', $plugin_settings, 'cleanup_collection_multiple_images' );
+      $this->loader->add_action( 'fbk_collection_image_cleanup', $plugin_settings, 'cleanup_collection_multiple_images' );
 
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-fontana-admin-views.php';
     $plugin_dashboard = new Fontana_Admin_Views();
