@@ -234,15 +234,14 @@ class Fontana {
 	private function define_public_hooks() {
 
 		$plugin_public = new Fontana_Public( $this->get_plugin_name(), $this->get_version() );
-
+    $this->loader->add_action( 'rest_api_init', $plugin_public, 'registerMenusWithApi');
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-		$this->loader->add_action( 'rest_api_init', $plugin_public, 'registerMenusWithApi' );
-		$this->loader->add_action( 'rest_api_init', $plugin_public, 'register_images_field' );
-    $this->loader->add_filter( 'tribe_rest_event_data', $plugin_public, 'add_tribe_event_data', 10, 2 );
+    
     $this->loader->add_filter( 'rest_collection-item_query',$plugin_public, 'collection_api_newest',10, 2 );
     $this->loader->add_filter( 'excerpt_more',$plugin_public, 'remove_read_more', 11);
     $this->loader->add_filter( 'rest_alert_query', $plugin_public, 'alert_api', 10, 2 );
+    
 
 		
 		// Register hooks related to custom events api
