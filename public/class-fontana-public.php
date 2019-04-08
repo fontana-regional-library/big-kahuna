@@ -537,11 +537,31 @@ class Fontana_Public {
    * Get post-type counts for search API.
    */
   function get_post_count_by_type($search, $postType){
-    $query = new WP_Query([
-      'posts_per_page' => 1,
-      'post_type' => $postType,
-      's' => $search
-    ]);
+    if($postType === 'tribe_events'){
+      $today = date('Y-m-d H:i:00');
+      $query = new WP_Query([
+        'posts_per_page' => 1,
+        's' => $search,
+        'meta_query' => array(
+          array(
+              'key' => '_EventStartDate',
+              'compare' => 'EXISTS',
+          ),
+          array(
+            'key'	=>	'_EventStartDate',
+            'value' => $today,
+            'compare' => '<=',
+            'type'  => 'DATETIME'
+          )
+        )
+      ]);
+    } else{
+     $query = new WP_Query([
+        'posts_per_page' => 1,
+        'post_type' => $postType,
+        's' => $search
+     ]);
+    }
 
     return (int) $query->found_posts;
   }
