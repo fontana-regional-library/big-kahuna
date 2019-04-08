@@ -111,6 +111,101 @@ class Fontana_Public {
             'methods' => 'GET',
             'callback' => [$this, 'getMenuByLocation'],
         ) );
+
+        // Register Search API endpoint
+        register_rest_route( $this->plugin_name . '/v1', '/search/', array(
+          'methods' => 'GET',
+          'callback' => [$this, 'fbk_get_search'],
+          'args' => array(
+            'per_page' => array(
+              'description'       => 'Maxiumum number of items to show per page.',
+              'type'              => 'integer',
+              'validate_callback' => function( $param, $request, $key ) {
+                return is_numeric( $param );
+               },
+              'sanitize_callback' => 'absint',
+            ),
+            'page' =>  array(
+              'description'       => 'Current page of the collection.',
+              'type'              => 'integer',
+              'validate_callback' => function( $param, $request, $key ) {
+                return is_numeric( $param );
+               },
+              'sanitize_callback' => 'absint'
+            ),
+            'category' =>  array(
+              'description'       => 'Get a category from the collection.',
+              'type'              => 'integer',
+              'validate_callback' => function( $param, $request, $key ) {
+                return is_numeric( $param );
+               },
+              'sanitize_callback' => 'absint'
+            ),
+            'tag' =>  array(
+              'description'       => 'Get a tag from the collection.',
+              'type'              => 'integer',
+              'validate_callback' => function( $param, $request, $key ) {
+                return is_numeric( $param );
+               },
+              'sanitize_callback' => 'absint'
+            ),
+            'content' =>  array(
+              'description'       => 'Hide or show the_content from the collection.',
+              'type'              => 'boolean',
+              'validate_callback' => function( $param, $request, $key ) {
+                if ( $param == 'true' || $param == 'TRUE' ) {
+                  $param = true;
+                } else if( $param == 'false' || $param == 'FALSE') {
+                  $param = false;
+                }
+                return is_bool( $param );
+               }
+            ),
+            'search' =>  array(
+              'description'       => 'The search term used to fetch the collection.',
+              'type'              => 'string',
+              'required'          => true,
+              'validate_callback' => function($param, $request, $key) {
+                  return is_string( $param );
+                },
+              'sanitize_callback' => 'sanitize_text_field'
+            ),
+          ),
+        ) );
+
+        /**
+         * Register Custom Fields
+         */
+        register_rest_field( array('collection-item','post','tribe_events'), 'featured_image',
+        array(
+          'get_callback'    => array( $this, 'get_image_url_full'),
+          'update_callback' => null,
+          'schema'          => null,
+        )
+      );
+
+      
+       // Add 'featured_image_thumbnail'
+      
+      register_rest_field( array('collection-item','post'), 'featured_image_thumbnail',
+         array(
+           'get_callback'    => array( $this, 'get_image_url_thumb'),
+           'update_callback' => null,
+           'schema'          => null,
+         )
+       );
+
+       // Add Content counts by post-type for taxonomies
+       $taxonomies = get_taxonomies(array(
+        'show_in_rest' => true
+      ));
+       register_rest_field( array_values($taxonomies), 'count_by_type',
+          array(
+            'get_callback'    => array( $this, 'add_term_post_counts'),
+            'update_callback' => null,
+            'schema'          => null,
+          )
+        ); 
     }
 
     public function getAllMenus()
@@ -135,27 +230,10 @@ class Fontana_Public {
         }
         return $menu;
 	}
-	public function register_images_field() {
-		register_rest_field( array('collection-item','post','tribe_events'), 'featured_image',
-        array(
-          'get_callback'    => array( $this, 'get_image_url_full'),
-          'update_callback' => null,
-          'schema'          => null,
-        )
-      );
 
-      
-       // Add 'featured_image_thumbnail'
-      
-      register_rest_field( array('collection-item','post'), 'featured_image_thumbnail',
-         array(
-           'get_callback'    => array( $this, 'get_image_url_thumb'),
-           'update_callback' => null,
-           'schema'          => null,
-         )
-       );
-	}
-	
+/**
+ * Get the featured image
+ */
 	function get_image_url_thumb(){
 		$url = $this->get_image('thumbnail');
 		return $url;
@@ -181,16 +259,7 @@ class Fontana_Public {
 			return "";
 		}
 	}
-	public function add_tribe_event_data($data, $event) {	
-		if (is_plugin_active('the-events-calendar/the-events-calendar.php')) {
-			$event_id = $data['id'];	
-			$services = get_the_terms( $event_id, 'services' );
-			$locations = get_the_terms( $event_id, 'location' );
-			$data["acf"]["services"] = $services;
-			$data["acf"]["locations"] = $locations;
-			}
-			return $data;
-    }
+
     /**
 	 * 
 	 * Sort collection items by record creation date and add filters for collection and type.
@@ -253,6 +322,7 @@ class Fontana_Public {
 		$args['meta_query'] = $meta_query; 
 		return $args;
   }
+
   /**
 
    * Removes the "continue reading" links from post excerpts.
@@ -260,6 +330,7 @@ class Fontana_Public {
   function remove_read_more($more){
     return;
   }
+
   /*
 	 * 
 	 * Filter Alerts api.
@@ -298,6 +369,220 @@ class Fontana_Public {
 		}
 		$args['meta_query'] = $meta_query; 
 		return $args;
-	}
+  }
 
+  /**
+   * Construct response for Search API endpoint
+   */
+  function fbk_get_search( WP_REST_Request $request ) {
+    // check for params
+    $posts_per_page = $request['per_page']?: '10';
+    $page = $request['page']?: '1';
+    $category = $request['category']?: null;
+    $tag = $request['tag']?: null;
+    $content = $request['content'];
+    $show_content = filter_var($content, FILTER_VALIDATE_BOOLEAN);
+    $search = $request['search']?: null;
+    // WP_Query arguments
+    $args = array(
+      'nopaging'               => false,
+      'posts_per_page'         => $posts_per_page,
+      'paged'                  => $page,
+      'cat'                    => $category,
+      'tag_id'                 => $tag,
+      's'                      => $search
+    );
+    // The Query
+    $query = new WP_Query( $args );
+    // Setup Posts Array
+    $posts = array();
+    // The Loop
+    if ( $query->have_posts() ) {
+      while ( $query->have_posts() ) {
+        $query->the_post();
+        global $post;
+        // For Headers
+        $total = $query->found_posts;
+        $pages = $query->max_num_pages;
+        // post object
+        $fbk_post = new stdClass();
+        // get post data
+        $permalink = get_permalink();
+        $fbk_post->id = get_the_ID();
+        $fbk_post->title = get_the_title();
+        $fbk_post->type = 'tribe_events'===($type = get_post_type()) ? 'event' : $type;
+
+        $fbk_post->slug = $post->post_name;
+        $fbk_post->permalink = $permalink;
+        $fbk_post->date = get_the_date('c');
+        $fbk_post->date_modified = get_the_modified_date('c');
+        $fbk_post->excerpt = get_the_excerpt();
+        $fbk_post->content = apply_filters('the_content', get_the_content());
+        
+        $fbk_post->author = esc_html__(get_the_author(), 'text_domain');
+        $fbk_post->author_id = get_the_author_meta('ID');
+
+        // add tribe_event fields
+        if($fbk_post->type === 'event'){
+          $meta = tribe_get_event_meta();
+          
+          $fbk_post->start_date = $meta["_EventStartDate"][0];
+          $time = strtotime( $fbk_post->start_date );
+          $fbk_post->start_date_details = array(
+                        'year'    => date( 'Y', $time ),
+                        'month'   => date( 'm', $time ),
+                        'day'     => date( 'd', $time ),
+                        'hour'    => date( 'H', $time ),
+                        'minutes' => date( 'i', $time ),
+                        'seconds' => date( 's', $time ),
+                      );
+          $fbk_post->end_date = $meta["_EventEndDate"][0];
+          $time = strtotime( $fbk_post->end_date );
+          $fbk_post->end_date_details = array(
+                        'year'    => date( 'Y', $time ),
+                        'month'   => date( 'm', $time ),
+                        'day'     => date( 'd', $time ),
+                        'hour'    => date( 'H', $time ),
+                        'minutes' => date( 'i', $time ),
+                        'seconds' => date( 's', $time ),
+                      );
+          $fbk_post->organizer_ids = $meta["_EventOrganizerID"];
+          $fbk_post->venue_ids = $meta["_EventVenueID"];
+          
+        }
+        /*
+         *
+         * return acf fields if they exist and depending on query string
+         *
+         */
+        
+        $fbk_post->acf = $this->fbk_get_acf();
+
+        
+        /*
+         *
+         * get featured image
+         *
+         */
+        $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+          
+        if($image){
+          $fbk_post->featured_thumbnail = $image[0];
+        }
+        
+        // Push the post to the main $post array
+        array_push($posts, $fbk_post);
+      }
+      //$count = $this->fbk_content_count($search);
+      $results=array(
+        'total' => (int) $total,
+        'total_pages' => (int) $pages,
+        'count' => $this->fbk_content_count($search),
+        'content' => $posts
+      );
+      // return the post array
+      $response = rest_ensure_response( $results );
+      $response->header( 'X-WP-Total', (int) $total );
+      $response->header( 'X-WP-TotalPages', (int) $pages );
+      return $response;
+    } else {
+      // return empty posts array if no posts
+      return $posts;
+    }
+    // Restore original Post Data
+    wp_reset_postdata();
+  }
+  /**
+   * Get the ACF content for a post.
+   */
+  function fbk_get_acf() {
+  
+    include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+    // check if acf is active before doing anything
+     if( is_plugin_active('advanced-custom-fields-pro/acf.php') || is_plugin_active('advanced-custom-fields/acf.php') ) {
+       // get fields
+       $acf_fields = get_fields();
+       // if we have fields
+       if( $acf_fields ) {
+         return $acf_fields;
+       }
+     } else {
+       // no acf, return false
+       return false;
+     }
+  }
+  
+  /**
+   * Constructs container for post-type counts for search API.
+   */
+  function fbk_content_count($search){
+    $post_types = get_post_types(array(
+      '_builtin'  => false,
+      'public'    => true,
+      'publicly_queryable'  => true
+    ));
+    array_push($post_types, 'post', 'page');
+    $results = array();
+    foreach($post_types as $type){
+      if($type === 'tribe_events'){
+        $results['events'] = $this->get_post_count_by_type($search, 'tribe_events');
+      } else{
+      $results[$type] = $this->get_post_count_by_type($search, $type);
+      }
+    }
+
+    return $results;
+  }
+  /**
+   * Get post-type counts for search API.
+   */
+  function get_post_count_by_type($search, $postType){
+    $query = new WP_Query([
+      'posts_per_page' => 1,
+      'post_type' => $postType,
+      's' => $search
+    ]);
+
+    return (int) $query->found_posts;
+  }
+/**
+ * Get post-type counts for Terms.
+ */
+  function get_term_post_count_by_type($postType, $taxonomy, $term){
+    $query = new WP_Query([
+      'posts_per_page' => 1,
+      'post_type' => $postType,
+      'tax_query' => array(
+        array(
+            'taxonomy' => $taxonomy,
+            'field' => 'slug',
+            'terms' => $term
+        )
+      )
+    ]);
+    
+    return $query->found_posts; 
+  }
+  /**
+   * Construct container for post type counts to be included in taxonomy rest response.
+   */
+  function add_term_post_counts($object, $field_name, $request, $object_type){
+    $post_types = get_post_types(array(
+      '_builtin'  => false,
+      'public'    => true,
+      'publicly_queryable'  => true
+    ));
+    array_push($post_types, 'post', 'page');
+
+    $results = array();
+    foreach($post_types as $type){
+      if($type === 'tribe_events'){
+        $results['events'] = $this->get_term_post_count_by_type('tribe_events', $object['taxonomy'], $object['slug']);
+      } else{
+        $results[$type] = $this->get_term_post_count_by_type($type, $object['taxonomy'], $object['slug']);
+      }
+    }
+
+    return $results;
+  }
 }
