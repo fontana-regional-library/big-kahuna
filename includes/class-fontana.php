@@ -166,6 +166,7 @@ class Fontana {
       $this->loader->add_action( 'init', $plugin_admin, 'registerCallToActionType' );
       $this->loader->add_action( 'init', $plugin_admin, 'registerAlertStatusType' );
       $this->loader->add_action( 'init', $plugin_admin, 'registerCollectionItemType' );
+      $this->loader->add_action( 'init', $plugin_admin, 'registerHelpType' );
       $this->loader->add_action( 'init', $plugin_admin, 'registerResourceType' );
       //Register Custom Taxonnomies
       $this->loader->add_action( 'init', $plugin_admin, 'registerAudienceTaxonomy' );

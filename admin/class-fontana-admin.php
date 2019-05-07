@@ -108,6 +108,7 @@ class Fontana_Admin {
    *  Call-to-action      actions           calls-to-action
    *  Closings & Alerts   alert             notices
    *  Collection Items    collection-item   collection
+   *  Help                help              help
    *  Resources           resources         resources
    */
   public function registerCallToActionType() {
@@ -281,25 +282,25 @@ class Fontana_Admin {
 
 }
 
-  public function registerResourceType() {
+  public function registerHelpType() {
 
       $labels = array(
-          'name'                  => _x( 'Resources', 'Post Type General Name', 'fontana' ),
-          'singular_name'         => _x( 'Resource', 'Post Type Singular Name', 'fontana' ),
-          'menu_name'             => __( 'Resource', 'fontana' ),
-          'name_admin_bar'        => __( 'Resource', 'fontana' ),
-          'archives'              => __( 'All Resources', 'fontana' ),
-          'attributes'            => __( 'Resource Attributes', 'fontana' ),
-          'parent_item_colon'     => __( 'Parent Resource:', 'fontana' ),
-          'all_items'             => __( 'All Resource', 'fontana' ),
-          'add_new_item'          => __( 'Add New Resource', 'fontana' ),
+          'name'                  => _x( 'Help', 'Post Type General Name', 'fontana' ),
+          'singular_name'         => _x( 'Information', 'Post Type Singular Name', 'fontana' ),
+          'menu_name'             => __( 'FAQ & Help Information', 'fontana' ),
+          'name_admin_bar'        => __( 'Help', 'fontana' ),
+          'archives'              => __( 'All FAQ & Help Information', 'fontana' ),
+          'attributes'            => __( 'Help Attributes', 'fontana' ),
+          'parent_item_colon'     => __( 'Parent Help:', 'fontana' ),
+          'all_items'             => __( 'All Information', 'fontana' ),
+          'add_new_item'          => __( 'Add New Help Information', 'fontana' ),
           'add_new'               => __( 'Add New', 'fontana' ),
-          'new_item'              => __( 'New Item', 'fontana' ),
-          'edit_item'             => __( 'Edit Item', 'fontana' ),
-          'update_item'           => __( 'Update Item', 'fontana' ),
-          'view_item'             => __( 'View Item', 'fontana' ),
-          'view_items'            => __( 'View Items', 'fontana' ),
-          'search_items'          => __( 'Search Item', 'fontana' ),
+          'new_item'              => __( 'New FAQ/Tip', 'fontana' ),
+          'edit_item'             => __( 'Edit Help Information', 'fontana' ),
+          'update_item'           => __( 'Update Help Information', 'fontana' ),
+          'view_item'             => __( 'View Help Information', 'fontana' ),
+          'view_items'            => __( 'View Help Information', 'fontana' ),
+          'search_items'          => __( 'Search Help Information', 'fontana' ),
           'not_found'             => __( 'Not found', 'fontana' ),
           'not_found_in_trash'    => __( 'Not found in Trash', 'fontana' ),
           'featured_image'        => __( 'Featured Image', 'fontana' ),
@@ -313,30 +314,87 @@ class Fontana_Admin {
           'filter_items_list'     => __( 'Filter items list', 'fontana' ),
       );
       $args = array(
-          'label'                 => __( 'Resource', 'fontana' ),
-          'description'           => __( 'Resources are electronic or physical resources the library provides.', 'fontana' ),
+          'label'                 => __( 'Help', 'fontana' ),
+          'description'           => __( 'FAQs, Tips, and Help Information', 'fontana' ),
           'labels'                => $labels,
-          'supports'              => array( 'title' ),
-          'taxonomies'            => array(),
-          'hierarchical'          => false,
+          'supports'              => array( 'title', 'editor', 'page-attributes'),
+          'taxonomies'            => array('category'),
+          'hierarchical'          => true,
           'public'                => true,
           'show_ui'               => true,
           'show_in_menu'          => true,
           'menu_position'         => 5,
-          'menu_icon'             => 'dashicons-admin-site',
+          'menu_icon'             => 'dashicons-lightbulb',
           'show_in_admin_bar'     => true,
           'show_in_nav_menus'     => true,
           'can_export'            => true,
           'has_archive'           => false,
-          'exclude_from_search'   => true,
+          'exclude_from_search'   => false,
           'publicly_queryable'    => true,
           'capability_type'       => 'page',
           'show_in_rest'          => true,
-          'rest_base'             => 'resources',
+          'rest_base'             => 'help',
       );
-      register_post_type( 'resources', $args );
+      register_post_type( 'help', $args );
 
   }
+
+  public function registerResourceType() {
+
+    $labels = array(
+        'name'                  => _x( 'Resources', 'Post Type General Name', 'fontana' ),
+        'singular_name'         => _x( 'Resource', 'Post Type Singular Name', 'fontana' ),
+        'menu_name'             => __( 'Resource', 'fontana' ),
+        'name_admin_bar'        => __( 'Resource', 'fontana' ),
+        'archives'              => __( 'All Resources', 'fontana' ),
+        'attributes'            => __( 'Resource Attributes', 'fontana' ),
+        'parent_item_colon'     => __( 'Parent Resource:', 'fontana' ),
+        'all_items'             => __( 'All Resource', 'fontana' ),
+        'add_new_item'          => __( 'Add New Resource', 'fontana' ),
+        'add_new'               => __( 'Add New', 'fontana' ),
+        'new_item'              => __( 'New Item', 'fontana' ),
+        'edit_item'             => __( 'Edit Item', 'fontana' ),
+        'update_item'           => __( 'Update Item', 'fontana' ),
+        'view_item'             => __( 'View Item', 'fontana' ),
+        'view_items'            => __( 'View Items', 'fontana' ),
+        'search_items'          => __( 'Search Item', 'fontana' ),
+        'not_found'             => __( 'Not found', 'fontana' ),
+        'not_found_in_trash'    => __( 'Not found in Trash', 'fontana' ),
+        'featured_image'        => __( 'Featured Image', 'fontana' ),
+        'set_featured_image'    => __( 'Set featured image', 'fontana' ),
+        'remove_featured_image' => __( 'Remove featured image', 'fontana' ),
+        'use_featured_image'    => __( 'Use as featured image', 'fontana' ),
+        'insert_into_item'      => __( 'Insert into item', 'fontana' ),
+        'uploaded_to_this_item' => __( 'Uploaded to this item', 'fontana' ),
+        'items_list'            => __( 'Items list', 'fontana' ),
+        'items_list_navigation' => __( 'Items list navigation', 'fontana' ),
+        'filter_items_list'     => __( 'Filter items list', 'fontana' ),
+    );
+    $args = array(
+        'label'                 => __( 'Resource', 'fontana' ),
+        'description'           => __( 'Resources are electronic or physical resources the library provides.', 'fontana' ),
+        'labels'                => $labels,
+        'supports'              => array( 'title' ),
+        'taxonomies'            => array(),
+        'hierarchical'          => false,
+        'public'                => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 5,
+        'menu_icon'             => 'dashicons-admin-site',
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => false,
+        'exclude_from_search'   => true,
+        'publicly_queryable'    => true,
+        'capability_type'       => 'page',
+        'show_in_rest'          => true,
+        'rest_base'             => 'resources',
+    );
+    register_post_type( 'resources', $args );
+
+}
 
   /**
    * Register custom taxonomies
